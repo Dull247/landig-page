@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ادرس في ماليزيا | Study in Malaysia - Global Admissions</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#051126',    // Royal Navy (From Logo Theme)
+                        secondary: '#C5A059',  // Polished Gold (From Logo Theme)
+                        accent: '#1A2B47',     // Deep Blue Slate
+                        success: '#22C55E'     // WhatsApp Green
+                    },
+                    fontFamily: {
+                        sans: ['Tajawal', 'Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #051126 0%, #0D2142 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            opacity: 0.1;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .gold-border-btn {
+            border: 2px solid #C5A059;
+            color: #C5A059;
+            transition: all 0.3s ease;
+        }
+        .gold-border-btn:hover {
+            background: #C5A059;
+            color: #051126;
+        }
+        .whatsapp-pulse {
+            animation: pulse-green 2s infinite;
+        }
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        .shimmer {
+            background: linear-gradient(90deg, rgba(197,160,89,0) 0%, rgba(197,160,89,0.2) 50%, rgba(197,160,89,0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-primary text-slate-300">
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/60186602976" target="_blank" class="whatsapp-pulse fixed bottom-8 left-8 z-[100] bg-success text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- Nav -->
+    <nav class="fixed top-0 w-full z-50 bg-primary/90 backdrop-blur-md border-b border-white/5">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-secondary blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                    <!-- Logo Updated to malaysiamate.png -->
+                    <img src="malaysiamate.png" alt="Malaysia Mate Logo" class="relative w-14 h-14 object-contain rounded-lg" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3429/3429433.png'">
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-black text-2xl tracking-tight text-white uppercase leading-none">Malaysia<span class="text-secondary italic">Mate</span></span>
+                    <span class="text-[9px] text-secondary font-bold uppercase tracking-[0.4em]">Elite Admissions</span>
+                </div>
+            </div>
+            
+            <div class="hidden lg:flex items-center gap-8 text-[11px] font-black uppercase tracking-widest text-slate-400">
+                <a href="#about" class="hover:text-secondary transition-colors">من نحن</a>
+                <a href="#services" class="hover:text-secondary transition-colors">خدماتنا</a>
+                <a href="#steps" class="hover:text-secondary transition-colors">التقديم</a>
+                <a href="#contact" class="hover:text-secondary transition-colors">اتصل بنا</a>
+            </div>
+
+            <a href="https://wa.me/60186602976" class="bg-secondary text-primary px-6 py-2.5 rounded-full font-black text-sm hover:shadow-[0_0_20px_rgba(197,160,89,0.4)] transition-all">
+                تواصل الآن
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero-bg min-h-screen flex items-center pt-24 px-6">
+        <div class="container mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div class="text-right space-y-8">
+                <div class="inline-flex items-center gap-3 bg-secondary/10 border border-secondary/20 px-5 py-2 rounded-full">
+                    <span class="w-2 h-2 bg-secondary rounded-full animate-ping"></span>
+                    <span class="text-xs font-bold text-secondary uppercase tracking-widest">وكيل معتمد لجامعات ماليزيا</span>
+                </div>
+                
+                <h1 class="text-5xl lg:text-8xl font-black text-white leading-tight">
+                    مستقبلك يبدأ <br>
+                    <span class="text-secondary shimmer inline-block px-2">في ماليزيا</span>
+                </h1>
+                
+                <p class="text-slate-400 text-lg lg:text-xl leading-relaxed max-w-xl">
+                    نحن نذلل الصعاب لنضعك في أرقى الجامعات العالمية. استشارات مجانية، قبولات سريعة، وخدمات متكاملة تضمن لك راحة البال والتركيز على دراستك.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <a href="https://wa.me/60186602976" class="bg-secondary text-primary px-12 py-5 rounded-2xl font-black text-xl text-center shadow-xl hover:-translate-y-1 transition-all">
+                        تواصل واتساب الآن
+                    </a>
+                    <a href="#about" class="gold-border-btn px-12 py-5 rounded-2xl font-black text-xl text-center">
+                        لماذا نحن؟
+                    </a>
+                </div>
+
+                <div class="flex items-center gap-6 pt-4">
+                    <div class="flex -space-x-3 rtl:space-x-reverse">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" class="w-12 h-12 rounded-full border-2 border-primary object-cover">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" class="w-12 h-12 rounded-full border-2 border-primary object-cover">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" class="w-12 h-12 rounded-full border-2 border-primary object-cover">
+                    </div>
+                    <p class="text-sm font-bold text-slate-500 tracking-tighter uppercase">+1500 طالب حصلوا على قبولهم</p>
+                </div>
+            </div>
+
+            <div class="relative hidden lg:block">
+                <div class="absolute -top-20 -left-20 w-64 h-64 bg-secondary/10 rounded-full blur-[100px]"></div>
+                <div class="relative z-10 p-4 glass-card rounded-[3rem]">
+                    <img 
+  src="malaysiamate.png.jpg" class="w-full h-full object-cover rounded-[2.5rem]">
+
+                </div>
+                <div class="absolute bottom-10 -right-10 bg-secondary p-8 rounded-3xl shadow-2xl z-20 transform rotate-3">
+                    <span class="text-4xl font-black text-primary block mb-1">99%</span>
+                    <span class="text-xs font-black text-primary/70 uppercase">نسبة نجاح الفيزا</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-32 px-6">
+        <div class="container mx-auto">
+            <div class="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
+                <div class="text-right">
+                    <span class="text-secondary font-black tracking-[0.4em] uppercase text-xs mb-4 block">خدماتنا الشاملة</span>
+                    <h2 class="text-4xl lg:text-6xl font-black text-white">طريقك للجامعة أصبح أسهل</h2>
+                </div>
+                <div class="h-1 bg-secondary/20 flex-grow max-w-md rounded-full mb-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Card 1 -->
+                <div class="glass-card p-12 rounded-[3rem] hover:bg-white/5 transition-all group border-t-2 border-transparent hover:border-secondary">
+                    <div class="w-20 h-20 bg-secondary/10 text-secondary rounded-[2rem] flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-university text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-4 text-white">القبول الجامعي</h3>
+                    <p class="text-slate-400 leading-relaxed">توفير قبولات في أقوى الجامعات الماليزية المعتمدة عالمياً بكفاءة عالية وبأقل وقت ممكن.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="glass-card p-12 rounded-[3rem] hover:bg-white/5 transition-all group border-t-2 border-transparent hover:border-secondary">
+                    <div class="w-20 h-20 bg-secondary/10 text-secondary rounded-[2rem] flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-language text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-4 text-white">معاهد اللغة</h3>
+                    <p class="text-slate-400 leading-relaxed">تسجيل في أقوى معاهد اللغة الإنجليزية لضمان وصولك للمستوى المطلوب قبل بدء الدراسة الجامعية.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass-card p-12 rounded-[3rem] hover:bg-white/5 transition-all group border-t-2 border-transparent hover:border-secondary">
+                    <div class="w-20 h-20 bg-secondary/10 text-secondary rounded-[2rem] flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-passport text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-4 text-white">إجراءات الفيزا</h3>
+                    <p class="text-slate-400 leading-relaxed">فريق مختص يتابع ملف التأشيرة الخاص بك مع دائرة الهجرة الماليزية لضمان القبول السلس.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us -->
+    <section id="about" class="py-32 bg-accent/30 px-6 border-y border-white/5">
+        <div class="container mx-auto grid lg:grid-cols-2 gap-24 items-center">
+            <div class="space-y-12">
+                <h2 class="text-4xl lg:text-6xl font-black text-white leading-tight">لماذا يختارنا الطلاب؟</h2>
+                <div class="grid gap-8">
+                    <div class="flex gap-6 items-start">
+                        <div class="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center shrink-0">
+                            <i class="fas fa-user-check text-primary text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-white mb-2">متابعة شخصية</h4>
+                            <p class="text-slate-400">لست مجرد رقم عندنا، نحن معك في كل خطوة حتى تستقر في غرفتك الجامعية.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <div class="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center shrink-0">
+                            <i class="fas fa-handshake text-primary text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-white mb-2">شفافية كاملة</h4>
+                            <p class="text-slate-400">لا توجد رسوم مخفية، نوضح لك التكاليف الحقيقية للسكن والمعيشة والدراسة بكل صدق.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <div class="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center shrink-0">
+                            <i class="fas fa-clock text-primary text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-white mb-2">سرعة في التنفيذ</h4>
+                            <p class="text-slate-400">نحن نتفهم قيمة وقتك، لذا نستخدم أحدث الأنظمة للتقديم والمتابعة السريعة.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="Community" class="rounded-[4rem] shadow-3xl">
+                <div class="absolute inset-0 bg-secondary/10 rounded-[4rem] -rotate-3 -z-10"></div>
+            </div>
+        </div>
+    </section>
+
+  <!-- Trusted Partners -->
+<section class="py-24 px-6">
+  <div class="container mx-auto">
+
+    <!-- Title -->
+    <div class="text-center mb-16">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.4em] text-slate-400">
+        Trusted by leading institutions
+      </p>
+    </div>
+
+    <!-- Strip -->
+    <div class="relative overflow-hidden">
+      <div class="flex items-center justify-center gap-20 sm:gap-28 lg:gap-36">
+
+        <img src="sheffield.jpg"
+             class="h-16 sm:h-20 lg:h-24 opacity-90"
+             alt="Sheffield">
+
+        <img src="ems langauge center.jpg"
+             class="h-16 sm:h-20 lg:h-24 opacity-90"
+             alt="EMS Language Center">
+
+        <img src="manshester langauge center.jpg"
+             class="h-16 sm:h-20 lg:h-24 opacity-90"
+             alt="Manchester Language Center">
+
+        <span class="text-sm sm:text-base font-medium text-slate-400 tracking-wide">
+          +40 institutions
+        </span>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+        </div>
+    </section>
+
+   <!-- Application Form (WhatsApp Working Version) -->
+<section id="contact" class="py-32 px-6">
+  <div class="container mx-auto max-w-6xl">
+    <div class="glass-card rounded-[4rem] overflow-hidden flex flex-col lg:flex-row shadow-inner border border-white/5">
+
+      <!-- Left Info -->
+      <div class="lg:w-1/2 p-16 bg-accent/50 flex flex-col justify-center">
+        <h2 class="text-4xl font-black text-white mb-6">سجل اهتمامك الآن</h2>
+        <p class="text-slate-400 mb-12 text-lg">سيتواصل معك مستشارك التعليمي خلال 24 ساعة لتقديم خطة دراسية كاملة تناسب طموحك.</p>
+        <div class="space-y-6">
+          <div class="flex items-center gap-4">
+            <i class="fas fa-check-circle text-secondary"></i>
+            <span class="font-bold">استشارة أكاديمية احترافية مجانية</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <i class="fas fa-check-circle text-secondary"></i>
+            <span class="font-bold">تحديد الميزانية وخيارات السكن</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="lg:w-1/2 p-16">
+        <form id="whatsappForm" class="space-y-8">
+
+          <div>
+            <label class="block text-xs font-black text-secondary uppercase tracking-widest mb-3">الاسم الكامل</label>
+            <input id="name" type="text" required
+              placeholder="مثال: أحمد محمد"
+              class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-secondary transition-colors text-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-black text-secondary uppercase tracking-widest mb-3">رقم الواتساب</label>
+            <input id="phone" type="tel" required
+              placeholder="+966 5xxxxxxxx"
+              class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-secondary transition-colors text-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-black text-secondary uppercase tracking-widest mb-3">المستوى التعليمي</label>
+            <select id="level"
+              class="w-full bg-[#0D2142] border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-secondary transition-colors text-white">
+              <option value="لغة إنجليزية">لغة إنجليزية</option>
+              <option value="بكالوريوس">بكالوريوس</option>
+              <option value="ماجستير / دكتوراة">ماجستير / دكتوراة</option>
+            </select>
+          </div>
+
+          <button type="submit"
+            class="w-full bg-secondary text-primary py-5 rounded-2xl font-black text-xl hover:brightness-110 shadow-lg shadow-secondary/20 transition-all">
+            إرسال الطلب عبر واتساب
+          </button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.getElementById('whatsappForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const level = document.getElementById('level').value;
+
+    const message = `مرحبا، اسمي ${name}%0Aرقم الواتساب: ${phone}%0Aالمستوى التعليمي: ${level}%0Aأرغب في الاستشارة للدراسة في ماليزيا`;
+
+    const whatsappNumber = 'YOUR_PHONE_NUMBER'; // example: 60123456789
+
+    const url = `https://wa.me/${60186602976}?text=${message}`;
+    window.open(url, '_blank');
+  });
+</script>
+    <!-- Footer -->
+    <footer class="py-20 px-6 border-t border-white/5">
+        <div class="container mx-auto">
+            <div class="flex flex-col lg:flex-row justify-between items-center gap-12 mb-16">
+                <div class="flex items-center gap-4">
+                    <!-- Footer Logo Updated -->
+                    <img src="malaysiamate.png" alt="Malaysia Mate Logo" class="w-12 h-12 object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3429/3429433.png'">
+                    <span class="text-2xl font-black text-white uppercase leading-none">Malaysia<span class="text-secondary italic">Mate</span></span>
+                </div>
+                <div class="flex gap-10 text-slate-500 font-bold uppercase text-xs tracking-widest">
+                    <a href="#" class="hover:text-secondary transition-colors">Instagram</a>
+                    <a href="#" class="hover:text-secondary transition-colors">TikTok</a>
+                    <a href="#" class="hover:text-secondary transition-colors">LinkedIn</a>
+                </div>
+                <p class="text-slate-500 text-[10px] font-black uppercase tracking-[0.4em]">&copy; 2024 MALAYSIA MATE PRO. WORLD CLASS ADMISSIONS.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
