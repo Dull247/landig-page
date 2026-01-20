@@ -7,7 +7,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -23,6 +23,7 @@
                     },
                     fontFamily: {
                         sans: ['Tajawal', 'Montserrat', 'sans-serif'],
+                        english: ['Montserrat', 'sans-serif'],
                     }
                 }
             }
@@ -33,7 +34,13 @@
         body {
             font-family: 'Tajawal', sans-serif;
             scroll-behavior: smooth;
+            transition: font-family 0.3s ease;
         }
+        /* English Font Override */
+        html[lang="en"] body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
         .hero-bg {
             background: linear-gradient(135deg, #051126 0%, #0D2142 100%);
             position: relative;
@@ -81,6 +88,12 @@
         #mobile-menu {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        
+        /* Language specific utility to flip margins/padding if needed */
+        html[dir="ltr"] .rtl-space-x-reverse {
+            margin-left: -0.75rem; /* -space-x-3 */
+            margin-right: 0;
+        }
     </style>
 </head>
 <body class="bg-primary text-slate-300 overflow-x-hidden">
@@ -107,15 +120,22 @@
             
             <!-- Desktop Menu -->
             <div class="hidden lg:flex items-center gap-8 text-[11px] font-black uppercase tracking-widest text-slate-400">
-                <a href="#about" class="hover:text-secondary transition-colors">من نحن</a>
-                <a href="#services" class="hover:text-secondary transition-colors">خدماتنا</a>
-                <a href="#contact" class="hover:text-secondary transition-colors">اتصل بنا</a>
+                <a href="#about" class="hover:text-secondary transition-colors" data-i18n="nav_about">من نحن</a>
+                <a href="#services" class="hover:text-secondary transition-colors" data-i18n="nav_services">خدماتنا</a>
+                <a href="#contact" class="hover:text-secondary transition-colors" data-i18n="nav_contact">اتصل بنا</a>
             </div>
 
             <div class="flex items-center gap-3">
-                <a href="https://wa.me/60186602976" class="hidden sm:block bg-secondary text-primary px-5 py-2 rounded-full font-black text-xs md:text-sm hover:shadow-[0_0_20px_rgba(197,160,89,0.4)] transition-all">
+                <!-- Language Switcher -->
+                <button onclick="toggleLanguage()" class="flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all border border-white/10">
+                    <i class="fas fa-globe text-secondary"></i>
+                    <span id="lang-text">English</span>
+                </button>
+
+                <a href="https://wa.me/60186602976" class="hidden sm:block bg-secondary text-primary px-5 py-2 rounded-full font-black text-xs md:text-sm hover:shadow-[0_0_20px_rgba(197,160,89,0.4)] transition-all" data-i18n="nav_cta">
                     تواصل الآن
                 </a>
+                
                 <!-- Mobile Menu Toggle -->
                 <button id="menu-btn" class="lg:hidden text-white p-2 focus:outline-none" aria-label="Toggle Menu">
                     <i id="menu-icon" class="fas fa-bars text-2xl"></i>
@@ -126,11 +146,11 @@
         <!-- Mobile Menu Overlay -->
         <div id="mobile-menu" class="fixed inset-0 top-[60px] md:top-[70px] w-full h-[calc(100vh-60px)] bg-primary/98 z-[90] translate-x-full lg:hidden flex flex-col justify-center items-center px-6 py-12">
             <div class="flex flex-col gap-8 text-center text-2xl font-bold uppercase tracking-widest text-white">
-                <a href="#about" class="mobile-link hover:text-secondary transition-colors">من نحن</a>
-                <a href="#services" class="mobile-link hover:text-secondary transition-colors">خدماتنا</a>
-                <a href="#contact" class="mobile-link hover:text-secondary transition-colors">اتصل بنا</a>
+                <a href="#about" class="mobile-link hover:text-secondary transition-colors" data-i18n="nav_about">من نحن</a>
+                <a href="#services" class="mobile-link hover:text-secondary transition-colors" data-i18n="nav_services">خدماتنا</a>
+                <a href="#contact" class="mobile-link hover:text-secondary transition-colors" data-i18n="nav_contact">اتصل بنا</a>
                 <div class="h-px bg-white/10 w-48 mx-auto"></div>
-                <a href="https://wa.me/60186602976" class="bg-secondary text-primary px-10 py-4 rounded-2xl text-lg">تواصل واتساب</a>
+                <a href="https://wa.me/60186602976" class="bg-secondary text-primary px-10 py-4 rounded-2xl text-lg" data-i18n="mobile_cta">تواصل واتساب</a>
             </div>
         </div>
     </nav>
@@ -138,26 +158,26 @@
     <!-- Hero -->
     <section class="hero-bg min-h-screen flex items-center pt-28 pb-12 px-4 md:px-6">
         <div class="container mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div class="text-right space-y-6 md:space-y-8 order-2 lg:order-1">
+            <div class="text-right space-y-6 md:space-y-8 order-2 lg:order-1 rtl:lg:text-right ltr:lg:text-left text-center lg:text-start" id="hero-text-container">
                 <div class="inline-flex items-center gap-3 bg-secondary/10 border border-secondary/20 px-4 py-2 rounded-full">
                     <span class="w-2 h-2 bg-secondary rounded-full animate-ping"></span>
-                    <span class="text-[10px] md:text-xs font-bold text-secondary uppercase tracking-widest">وكيل معتمد لجامعات ماليزيا</span>
+                    <span class="text-[10px] md:text-xs font-bold text-secondary uppercase tracking-widest" data-i18n="hero_badge">وكيل معتمد لجامعات ماليزيا</span>
                 </div>
                 
                 <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-tight">
-                    مستقبلك يبدأ <br>
-                    <span class="text-secondary shimmer inline-block px-2">في ماليزيا</span>
+                    <span data-i18n="hero_title_1">مستقبلك يبدأ</span> <br>
+                    <span class="text-secondary shimmer inline-block px-2" data-i18n="hero_title_2">في ماليزيا</span>
                 </h1>
                 
-                <p class="text-slate-400 text-base md:text-lg lg:text-xl leading-relaxed max-w-xl">
+                <p class="text-slate-400 text-base md:text-lg lg:text-xl leading-relaxed max-w-xl ltr:mr-auto rtl:ml-auto" data-i18n="hero_desc">
                     نحن نذلل الصعاب لنضعك في أرقى الجامعات العالمية. استشارات مجانية، قبولات سريعة، وخدمات متكاملة تضمن لك راحة البال والتركيز على دراستك.
                 </p>
 
-                <div class="flex flex-col sm:flex-row gap-4 md:gap-6">
-                    <a href="https://wa.me/60186602976" class="bg-secondary text-primary px-8 md:px-12 py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-lg md:text-xl text-center shadow-xl hover:-translate-y-1 transition-all active:scale-95">
+                <div class="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center lg:justify-start">
+                    <a href="https://wa.me/60186602976" class="bg-secondary text-primary px-8 md:px-12 py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-lg md:text-xl text-center shadow-xl hover:-translate-y-1 transition-all active:scale-95" data-i18n="hero_btn_primary">
                         تواصل واتساب الآن
                     </a>
-                    <a href="#about" class="gold-border-btn px-8 md:px-12 py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-lg md:text-xl text-center active:scale-95">
+                    <a href="#about" class="gold-border-btn px-8 md:px-12 py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-lg md:text-xl text-center active:scale-95" data-i18n="hero_btn_secondary">
                         لماذا نحن؟
                     </a>
                 </div>
@@ -168,20 +188,20 @@
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" class="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-primary object-cover" alt="Student">
                         <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" class="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-primary object-cover" alt="Student">
                     </div>
-                    <p class="text-[10px] md:text-xs font-bold text-slate-500 tracking-tighter uppercase">+1500 طالب حصلوا على قبولهم</p>
+                    <p class="text-[10px] md:text-xs font-bold text-slate-500 tracking-tighter uppercase" data-i18n="hero_social_proof">+1500 طالب حصلوا على قبولهم</p>
                 </div>
             </div>
 
-            <!-- Hero Image - Adjusted for Mobile Visibility -->
+            <!-- Hero Image -->
             <div class="relative order-1 lg:order-2 flex justify-center">
                 <div class="absolute -top-10 -left-10 lg:-top-20 lg:-left-20 w-40 h-40 lg:w-64 lg:h-64 bg-secondary/10 rounded-full blur-[60px] lg:blur-[100px]"></div>
                 <div class="relative z-10 p-2 md:p-4 glass-card rounded-[2rem] md:rounded-[3rem] w-full max-w-[400px] lg:max-w-none">
                     <img src="malaysiamate.png.jpg" class="w-full h-auto object-cover rounded-[1.8rem] md:rounded-[2.5rem]" onerror="this.src='https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&w=800&q=80'">
                 </div>
                 <!-- success badge -->
-                <div class="absolute -bottom-4 right-0 lg:bottom-10 lg:-right-10 bg-secondary p-4 lg:p-8 rounded-2xl lg:rounded-3xl shadow-2xl z-20 transform rotate-3">
+                <div class="absolute -bottom-4 right-0 lg:bottom-10 lg:-right-10 bg-secondary p-4 lg:p-8 rounded-2xl lg:rounded-3xl shadow-2xl z-20 transform rotate-3 ltr:right-auto ltr:left-0 ltr:lg:-left-10 ltr:-rotate-3">
                     <span class="text-2xl lg:text-4xl font-black text-primary block mb-1 leading-none">99%</span>
-                    <span class="text-[8px] lg:text-xs font-black text-primary/70 uppercase">نسبة نجاح الفيزا</span>
+                    <span class="text-[8px] lg:text-xs font-black text-primary/70 uppercase" data-i18n="hero_badge_visa">نسبة نجاح الفيزا</span>
                 </div>
             </div>
         </div>
@@ -190,10 +210,10 @@
     <!-- Services -->
     <section id="services" class="py-16 md:py-32 px-4 md:px-6">
         <div class="container mx-auto">
-            <div class="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-12 md:mb-20 gap-6 text-center lg:text-right">
+            <div class="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-12 md:mb-20 gap-6 text-center lg:text-right ltr:lg:text-left">
                 <div class="max-w-xl">
-                    <span class="text-secondary font-black tracking-[0.4em] uppercase text-[10px] md:text-xs mb-3 block">خدماتنا الشاملة</span>
-                    <h2 class="text-3xl md:text-5xl lg:text-6xl font-black text-white">طريقك للجامعة أصبح أسهل</h2>
+                    <span class="text-secondary font-black tracking-[0.4em] uppercase text-[10px] md:text-xs mb-3 block" data-i18n="services_subtitle">خدماتنا الشاملة</span>
+                    <h2 class="text-3xl md:text-5xl lg:text-6xl font-black text-white" data-i18n="services_title">طريقك للجامعة أصبح أسهل</h2>
                 </div>
                 <div class="hidden lg:block h-1 bg-secondary/20 flex-grow max-w-md rounded-full mb-4"></div>
             </div>
@@ -204,24 +224,24 @@
                     <div class="w-14 h-14 md:w-20 md:h-20 bg-secondary/10 text-secondary rounded-xl md:rounded-[2rem] flex items-center justify-center mb-6 md:mb-8 group-hover:scale-110 transition-transform">
                         <i class="fas fa-university text-2xl md:text-4xl"></i>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-black mb-3 md:mb-4 text-white">القبول الجامعي</h3>
-                    <p class="text-slate-400 leading-relaxed text-sm md:text-base">توفير قبولات في أقوى الجامعات الماليزية المعتمدة عالمياً بكفاءة عالية وبأقل وقت ممكن.</p>
+                    <h3 class="text-xl md:text-2xl font-black mb-3 md:mb-4 text-white" data-i18n="service_1_title">القبول الجامعي</h3>
+                    <p class="text-slate-400 leading-relaxed text-sm md:text-base" data-i18n="service_1_desc">توفير قبولات في أقوى الجامعات الماليزية المعتمدة عالمياً بكفاءة عالية وبأقل وقت ممكن.</p>
                 </div>
                 <!-- Card 2 -->
                 <div class="glass-card p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] hover:bg-white/5 transition-all group border-t-2 border-transparent hover:border-secondary">
                     <div class="w-14 h-14 md:w-20 md:h-20 bg-secondary/10 text-secondary rounded-xl md:rounded-[2rem] flex items-center justify-center mb-6 md:mb-8 group-hover:scale-110 transition-transform">
                         <i class="fas fa-language text-2xl md:text-4xl"></i>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-black mb-3 md:mb-4 text-white">معاهد اللغة</h3>
-                    <p class="text-slate-400 leading-relaxed text-sm md:text-base">تسجيل في أقوى معاهد اللغة الإنجليزية لضمان وصولك للمستوى المطلوب قبل بدء الدراسة الجامعية.</p>
+                    <h3 class="text-xl md:text-2xl font-black mb-3 md:mb-4 text-white" data-i18n="service_2_title">معاهد اللغة</h3>
+                    <p class="text-slate-400 leading-relaxed text-sm md:text-base" data-i18n="service_2_desc">تسجيل في أقوى معاهد اللغة الإنجليزية لضمان وصولك للمستوى المطلوب قبل بدء الدراسة الجامعية.</p>
                 </div>
                 <!-- Card 3 -->
                 <div class="glass-card p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] hover:bg-white/5 transition-all group border-t-2 border-transparent hover:border-secondary">
                     <div class="w-14 h-14 md:w-20 md:h-20 bg-secondary/10 text-secondary rounded-xl md:rounded-[2rem] flex items-center justify-center mb-6 md:mb-8 group-hover:scale-110 transition-transform">
                         <i class="fas fa-passport text-2xl md:text-4xl"></i>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-black mb-3 md:mb-4 text-white">إجراءات الفيزا</h3>
-                    <p class="text-slate-400 leading-relaxed text-sm md:text-base">فريق مختص يتابع ملف التأشيرة الخاص بك مع دائرة الهجرة الماليزية لضمان القبول السلس.</p>
+                    <h3 class="text-xl md:text-2xl font-black mb-3 md:mb-4 text-white" data-i18n="service_3_title">إجراءات الفيزا</h3>
+                    <p class="text-slate-400 leading-relaxed text-sm md:text-base" data-i18n="service_3_desc">فريق مختص يتابع ملف التأشيرة الخاص بك مع دائرة الهجرة الماليزية لضمان القبول السلس.</p>
                 </div>
             </div>
         </div>
@@ -231,15 +251,15 @@
     <section id="about" class="py-16 md:py-32 bg-accent/30 px-4 md:px-6 border-y border-white/5">
         <div class="container mx-auto grid lg:grid-cols-2 gap-10 md:gap-24 items-center">
             <div class="space-y-8 md:space-y-12 order-2 lg:order-1">
-                <h2 class="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-tight">لماذا يختارنا الطلاب؟</h2>
+                <h2 class="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-tight" data-i18n="why_title">لماذا يختارنا الطلاب؟</h2>
                 <div class="grid gap-6 md:gap-8">
                     <div class="flex gap-4 md:gap-6 items-start">
                         <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-secondary flex items-center justify-center shrink-0">
                             <i class="fas fa-user-check text-primary text-lg md:text-2xl"></i>
                         </div>
                         <div>
-                            <h4 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2 text-right">متابعة شخصية</h4>
-                            <p class="text-slate-400 text-sm md:text-base text-right">لست مجرد رقم عندنا، نحن معك في كل خطوة حتى تستقر في غرفتك الجامعية.</p>
+                            <h4 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2 text-right ltr:text-left" data-i18n="why_1_title">متابعة شخصية</h4>
+                            <p class="text-slate-400 text-sm md:text-base text-right ltr:text-left" data-i18n="why_1_desc">لست مجرد رقم عندنا، نحن معك في كل خطوة حتى تستقر في غرفتك الجامعية.</p>
                         </div>
                     </div>
                     <div class="flex gap-4 md:gap-6 items-start">
@@ -247,8 +267,8 @@
                             <i class="fas fa-handshake text-primary text-lg md:text-2xl"></i>
                         </div>
                         <div>
-                            <h4 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2 text-right">شفافية كاملة</h4>
-                            <p class="text-slate-400 text-sm md:text-base text-right">لا توجد رسوم مخفية، نوضح لك التكاليف الحقيقية للسكن والمعيشة والدراسة بكل صدق.</p>
+                            <h4 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2 text-right ltr:text-left" data-i18n="why_2_title">شفافية كاملة</h4>
+                            <p class="text-slate-400 text-sm md:text-base text-right ltr:text-left" data-i18n="why_2_desc">لا توجد رسوم مخفية، نوضح لك التكاليف الحقيقية للسكن والمعيشة والدراسة بكل صدق.</p>
                         </div>
                     </div>
                 </div>
@@ -264,7 +284,7 @@
     <section class="py-12 md:py-24 px-4 md:px-6">
         <div class="container mx-auto overflow-hidden">
             <div class="text-center mb-8 md:mb-16">
-                <p class="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.3em] md:tracking-[0.4em] text-slate-400">
+                <p class="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.3em] md:tracking-[0.4em] text-slate-400" data-i18n="trusted_by">
                     Trusted by leading institutions
                 </p>
             </div>
@@ -274,7 +294,7 @@
                 <div class="px-4 py-2 bg-white/5 rounded-lg text-white font-bold text-lg">EMS</div>
                 <div class="px-4 py-2 bg-white/5 rounded-lg text-white font-bold text-lg">Manchester</div>
                 <div class="px-4 py-2 bg-white/5 rounded-lg text-white font-bold text-lg">APU</div>
-                <span class="text-xs md:text-base font-medium text-slate-400 tracking-wide">+40 institutions</span>
+                <span class="text-xs md:text-base font-medium text-slate-400 tracking-wide" data-i18n="partners_plus">+40 institutions</span>
             </div>
         </div>
     </section>
@@ -283,44 +303,44 @@
     <section id="contact" class="py-12 md:py-32 px-4 md:px-6">
         <div class="container mx-auto max-w-6xl">
             <div class="glass-card rounded-[2rem] md:rounded-[4rem] overflow-hidden flex flex-col lg:flex-row shadow-inner border border-white/5">
-                <!-- Left Info - Adjust padding for mobile -->
-                <div class="lg:w-1/2 p-8 md:p-16 bg-accent/50 flex flex-col justify-center text-right">
-                    <h2 class="text-3xl md:text-4xl font-black text-white mb-4 md:mb-6">سجل اهتمامك الآن</h2>
-                    <p class="text-slate-400 mb-6 md:mb-12 text-base md:text-lg">سيتواصل معك مستشارك التعليمي خلال 24 ساعة لتقديم خطة دراسية كاملة تناسب طموحك.</p>
+                <!-- Info Side -->
+                <div class="lg:w-1/2 p-8 md:p-16 bg-accent/50 flex flex-col justify-center text-right ltr:text-left">
+                    <h2 class="text-3xl md:text-4xl font-black text-white mb-4 md:mb-6" data-i18n="form_title">سجل اهتمامك الآن</h2>
+                    <p class="text-slate-400 mb-6 md:mb-12 text-base md:text-lg" data-i18n="form_desc">سيتواصل معك مستشارك التعليمي خلال 24 ساعة لتقديم خطة دراسية كاملة تناسب طموحك.</p>
                     <div class="space-y-4 md:space-y-6">
-                        <div class="flex items-center gap-4 justify-start flex-row-reverse">
+                        <div class="flex items-center gap-4 justify-start flex-row-reverse ltr:flex-row">
                             <i class="fas fa-check-circle text-secondary"></i>
-                            <span class="font-bold text-sm md:text-base">استشارة أكاديمية احترافية مجانية</span>
+                            <span class="font-bold text-sm md:text-base" data-i18n="form_point_1">استشارة أكاديمية احترافية مجانية</span>
                         </div>
-                        <div class="flex items-center gap-4 justify-start flex-row-reverse">
+                        <div class="flex items-center gap-4 justify-start flex-row-reverse ltr:flex-row">
                             <i class="fas fa-check-circle text-secondary"></i>
-                            <span class="font-bold text-sm md:text-base">تحديد الميزانية وخيارات السكن</span>
+                            <span class="font-bold text-sm md:text-base" data-i18n="form_point_2">تحديد الميزانية وخيارات السكن</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Form - Adjust padding for mobile -->
+                <!-- Form Side -->
                 <div class="lg:w-1/2 p-8 md:p-16">
                     <form id="whatsappForm" class="space-y-6 md:space-y-8">
                         <div>
-                            <label class="block text-[10px] font-black text-secondary uppercase tracking-widest mb-2 md:mb-3 text-right">الاسم الكامل</label>
-                            <input id="userName" type="text" required placeholder="مثال: أحمد محمد"
-                                class="w-full bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-5 md:px-6 py-4 outline-none focus:border-secondary transition-colors text-white text-sm md:text-base text-right">
+                            <label class="block text-[10px] font-black text-secondary uppercase tracking-widest mb-2 md:mb-3 text-right ltr:text-left" data-i18n="label_name">الاسم الكامل</label>
+                            <input id="userName" type="text" required data-placeholder="input_placeholder_name" placeholder="مثال: أحمد محمد"
+                                class="w-full bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-5 md:px-6 py-4 outline-none focus:border-secondary transition-colors text-white text-sm md:text-base text-right ltr:text-left">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-black text-secondary uppercase tracking-widest mb-2 md:mb-3 text-right">رقم الواتساب</label>
-                            <input id="userPhone" type="tel" required placeholder="+966 5xxxxxxxx"
-                                class="w-full bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-5 md:px-6 py-4 outline-none focus:border-secondary transition-colors text-white text-sm md:text-base text-left" dir="ltr">
+                            <label class="block text-[10px] font-black text-secondary uppercase tracking-widest mb-2 md:mb-3 text-right ltr:text-left" data-i18n="label_phone">رقم الواتساب</label>
+                            <input id="userPhone" type="tel" required data-placeholder="input_placeholder_phone" placeholder="+966 5xxxxxxxx"
+                                class="w-full bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-5 md:px-6 py-4 outline-none focus:border-secondary transition-colors text-white text-sm md:text-base text-left ltr:text-left" dir="ltr">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-black text-secondary uppercase tracking-widest mb-2 md:mb-3 text-right">المستوى التعليمي</label>
-                            <select id="userLevel" class="w-full bg-[#0D2142] border border-white/10 rounded-xl md:rounded-2xl px-5 md:px-6 py-4 outline-none focus:border-secondary transition-colors text-white text-sm md:text-base text-right appearance-none">
-                                <option value="لغة إنجليزية">لغة إنجليزية</option>
-                                <option value="بكالوريوس">بكالوريوس</option>
-                                <option value="ماجستير / دكتوراة">ماجستير / دكتوراة</option>
+                            <label class="block text-[10px] font-black text-secondary uppercase tracking-widest mb-2 md:mb-3 text-right ltr:text-left" data-i18n="label_level">المستوى التعليمي</label>
+                            <select id="userLevel" class="w-full bg-[#0D2142] border border-white/10 rounded-xl md:rounded-2xl px-5 md:px-6 py-4 outline-none focus:border-secondary transition-colors text-white text-sm md:text-base text-right ltr:text-left appearance-none">
+                                <option value="english" data-i18n="option_english">لغة إنجليزية</option>
+                                <option value="bachelors" data-i18n="option_bachelors">بكالوريوس</option>
+                                <option value="masters_phd" data-i18n="option_masters">ماجستير / دكتوراة</option>
                             </select>
                         </div>
-                        <button type="submit" class="w-full bg-secondary text-primary py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-lg md:text-xl hover:brightness-110 shadow-lg shadow-secondary/20 transition-all active:scale-95">
+                        <button type="submit" class="w-full bg-secondary text-primary py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-lg md:text-xl hover:brightness-110 shadow-lg shadow-secondary/20 transition-all active:scale-95" data-i18n="form_submit">
                             إرسال الطلب عبر واتساب
                         </button>
                     </form>
@@ -329,27 +349,192 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-12 md:py-20 px-4 md:px-6 border-t border-white/5">
-        <div class="container mx-auto">
-            <div class="flex flex-col lg:flex-row justify-between items-center gap-10 md:gap-12 mb-12 md:mb-16">
-                <div class="flex items-center gap-3">
-                    <img src="malaysiamate.png" alt="Logo" class="w-10 h-10 object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3429/3429433.png'">
-                    <span class="text-xl font-black text-white uppercase leading-none">Malaysia<span class="text-secondary italic">Mate</span></span>
-                </div>
-                <div class="flex gap-6 md:gap-10 text-slate-500 font-bold uppercase text-[10px] md:text-xs tracking-widest">
-                    <a href="#" class="hover:text-secondary transition-colors">Instagram</a>
-                    <a href="#" class="hover:text-secondary transition-colors">TikTok</a>
-                    <a href="#" class="hover:text-secondary transition-colors">Facebook</a>
-                </div>
-                <p class="text-slate-500 text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.4em] text-center">
-                    &copy; 2024 MALAYSIA MATE PRO. WORLD CLASS ADMISSIONS.
-                </p>
+   <!-- Footer -->
+<footer class="py-12 md:py-20 px-4 md:px-6 border-t-2 border-white/10">
+    <div class="container mx-auto">
+        <div class="flex flex-col lg:flex-row justify-between items-center gap-10 md:gap-12 mb-12 md:mb-16">
+
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <img src="malaysiamate.png" alt="Logo" class="w-10 h-10 object-contain"
+                     onerror="this.src='https://cdn-icons-png.flaticon.com/512/3429/3429433.png'">
+                <span class="text-xl font-black text-white uppercase leading-none">
+                    Malaysia<span class="text-secondary italic">Mate</span>
+                </span>
             </div>
+
+            <!-- Social Links -->
+            <div class="flex gap-6 md:gap-10 text-slate-500 font-bold uppercase text-[10px] md:text-xs tracking-widest">
+                <a href="https://www.instagram.com/Malaysiamate" target="_blank"
+                   class="hover:text-secondary transition-colors">Instagram</a>
+
+                <a href="https://www.tiktok.com/@malaysiamate" target="_blank"
+                   class="hover:text-secondary transition-colors">TikTok</a>
+
+                <a href="https://www.snapchat.com/@malaysiamate" target="_blank"
+                   class="hover:text-secondary transition-colors">Snapchat</a>
+
+                <a href="https://x.com/MyMalaysiamate" target="_blank"
+                   class="hover:text-secondary transition-colors">X</a>
+
+                <a href="https://linktr.ee/Malaysiamate" target="_blank"
+                   class="hover:text-secondary transition-colors">Linktree</a>
+            </div>
+
+            <!-- Copyright -->
+            <p class="text-slate-500 text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.4em] text-center">
+                &copy; 2026 MALAYSIA MATE PRO. WORLD CLASS ADMISSIONS.
+            </p>
+
         </div>
-    </footer>
+    </div>
+</footer>
+
 
     <script>
+        // --- Translation Data ---
+        const translations = {
+            ar: {
+                nav_about: "من نحن",
+                nav_services: "خدماتنا",
+                nav_contact: "اتصل بنا",
+                nav_cta: "تواصل الآن",
+                mobile_cta: "تواصل واتساب",
+                hero_badge: "وكيل معتمد لجامعات ماليزيا",
+                hero_title_1: "مستقبلك يبدأ",
+                hero_title_2: "في ماليزيا",
+                hero_desc: "نحن نذلل الصعاب لنضعك في أرقى الجامعات العالمية. استشارات مجانية، قبولات سريعة، وخدمات متكاملة تضمن لك راحة البال والتركيز على دراستك.",
+                hero_btn_primary: "تواصل واتساب الآن",
+                hero_btn_secondary: "لماذا نحن؟",
+                hero_social_proof: "+1500 طالب حصلوا على قبولهم",
+                hero_badge_visa: "نسبة نجاح الفيزا",
+                services_subtitle: "خدماتنا الشاملة",
+                services_title: "طريقك للجامعة أصبح أسهل",
+                service_1_title: "القبول الجامعي",
+                service_1_desc: "توفير قبولات في أقوى الجامعات الماليزية المعتمدة عالمياً بكفاءة عالية وبأقل وقت ممكن.",
+                service_2_title: "معاهد اللغة",
+                service_2_desc: "تسجيل في أقوى معاهد اللغة الإنجليزية لضمان وصولك للمستوى المطلوب قبل بدء الدراسة الجامعية.",
+                service_3_title: "إجراءات الفيزا",
+                service_3_desc: "فريق مختص يتابع ملف التأشيرة الخاص بك مع دائرة الهجرة الماليزية لضمان القبول السلس.",
+                why_title: "لماذا يختارنا الطلاب؟",
+                why_1_title: "متابعة شخصية",
+                why_1_desc: "لست مجرد رقم عندنا، نحن معك في كل خطوة حتى تستقر في غرفتك الجامعية.",
+                why_2_title: "شفافية كاملة",
+                why_2_desc: "لا توجد رسوم مخفية، نوضح لك التكاليف الحقيقية للسكن والمعيشة والدراسة بكل صدق.",
+                trusted_by: "شركاؤنا من الجامعات",
+                partners_plus: "+40 جامعة",
+                form_title: "سجل اهتمامك الآن",
+                form_desc: "سيتواصل معك مستشارك التعليمي خلال 24 ساعة لتقديم خطة دراسية كاملة تناسب طموحك.",
+                form_point_1: "استشارة أكاديمية احترافية مجانية",
+                form_point_2: "تحديد الميزانية وخيارات السكن",
+                label_name: "الاسم الكامل",
+                label_phone: "رقم الواتساب",
+                label_level: "المستوى التعليمي",
+                input_placeholder_name: "مثال: أحمد محمد",
+                input_placeholder_phone: "+966 5xxxxxxxx",
+                option_english: "لغة إنجليزية",
+                option_bachelors: "بكالوريوس",
+                option_masters: "ماجستير / دكتوراة",
+                form_submit: "إرسال الطلب عبر واتساب",
+                whatsapp_message_start: "مرحبا، أرغب في استشارة مجانية",
+                whatsapp_label_name: "الاسم",
+                whatsapp_label_phone: "الهاتف",
+                whatsapp_label_level: "التخصص"
+            },
+            en: {
+                nav_about: "About Us",
+                nav_services: "Services",
+                nav_contact: "Contact",
+                nav_cta: "Contact Now",
+                mobile_cta: "WhatsApp Us",
+                hero_badge: "Authorized Malaysian Agency",
+                hero_title_1: "Your Future",
+                hero_title_2: "Starts in Malaysia",
+                hero_desc: "We overcome difficulties to place you in prestigious global universities. Free consultations, fast admissions, and integrated services ensuring your peace of mind.",
+                hero_btn_primary: "WhatsApp Now",
+                hero_btn_secondary: "Why Us?",
+                hero_social_proof: "+1500 Students Admitted",
+                hero_badge_visa: "Visa Success Rate",
+                services_subtitle: "Our Comprehensive Services",
+                services_title: "Your Path to University Made Easy",
+                service_1_title: "University Admissions",
+                service_1_desc: "Securing admissions in top globally accredited Malaysian universities efficiently and quickly.",
+                service_2_title: "Language Institutes",
+                service_2_desc: "Registration in top English language institutes to ensure you reach the required level before university.",
+                service_3_title: "Visa Procedures",
+                service_3_desc: "A dedicated team monitors your visa file with the Malaysian Immigration Department to ensure smooth approval.",
+                why_title: "Why Choose Us?",
+                why_1_title: "Personal Follow-up",
+                why_1_desc: "You are not just a number to us; we are with you every step of the way until you settle into your dorm.",
+                why_2_title: "Full Transparency",
+                why_2_desc: "No hidden fees. We honestly explain the real costs of accommodation, living, and studying.",
+                trusted_by: "Trusted by leading institutions",
+                partners_plus: "+40 Institutions",
+                form_title: "Register Your Interest",
+                form_desc: "Your educational consultant will contact you within 24 hours to provide a complete study plan suited to your ambitions.",
+                form_point_1: "Free Professional Academic Consultation",
+                form_point_2: "Budgeting and Accommodation Options",
+                label_name: "Full Name",
+                label_phone: "WhatsApp Number",
+                label_level: "Education Level",
+                input_placeholder_name: "Ex: John Doe",
+                input_placeholder_phone: "+60 12 xxxxxxxx",
+                option_english: "English Course",
+                option_bachelors: "Bachelor's Degree",
+                option_masters: "Master's / PhD",
+                form_submit: "Send Request via WhatsApp",
+                whatsapp_message_start: "Hello Malaysia Mate, I would like a free consultation",
+                whatsapp_label_name: "Name",
+                whatsapp_label_phone: "Phone",
+                whatsapp_label_level: "Level"
+            }
+        };
+
+        let currentLang = localStorage.getItem('site_lang') || 'ar';
+
+        function updateContent() {
+            const t = translations[currentLang];
+            
+            // Text Content
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (t[key]) {
+                    element.innerText = t[key];
+                }
+            });
+
+            // Input Placeholders
+            document.querySelectorAll('[data-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-placeholder');
+                if (t[key]) {
+                    element.setAttribute('placeholder', t[key]);
+                }
+            });
+
+            // Direction and Language Attribute
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
+            // Toggle Button Text
+            const langBtnText = document.getElementById('lang-text');
+            langBtnText.innerText = currentLang === 'ar' ? 'English' : 'العربية';
+            
+            // Adjust text alignment classes dynamically if needed, 
+            // though Tailwind's 'rtl/ltr' prefixes handle most logic in HTML.
+            
+            // Save preference
+            localStorage.setItem('site_lang', currentLang);
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            updateContent();
+        }
+
+        // Initialize
+        updateContent();
+
+
         // --- Mobile Menu Toggle ---
         const menuBtn = document.getElementById('menu-btn');
         const menuIcon = document.getElementById('menu-icon');
@@ -392,11 +577,15 @@
         document.getElementById('whatsappForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
+            const t = translations[currentLang];
             const name = document.getElementById('userName').value.trim();
             const phone = document.getElementById('userPhone').value.trim();
-            const level = document.getElementById('userLevel').value;
+            
+            // Get selected text from dropdown
+            const levelSelect = document.getElementById('userLevel');
+            const levelText = levelSelect.options[levelSelect.selectedIndex].text;
 
-            const text = `مرحبا ماليزيا ميت،\n\nأرغب في الحصول على استشارة مجانية:\n- الاسم: ${name}\n- الهاتف: ${phone}\n- التخصص المطلوب: ${level}\n\nشكراً لكم.`;
+            const text = `${t.whatsapp_message_start}:\n\n- ${t.whatsapp_label_name}: ${name}\n- ${t.whatsapp_label_phone}: ${phone}\n- ${t.whatsapp_label_level}: ${levelText}`;
             const encodedText = encodeURIComponent(text);
             
             const whatsappNumber = '60186602976'; 
