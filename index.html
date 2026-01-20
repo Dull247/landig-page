@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ادرس في ماليزيا | Study in Malaysia - Global Admissions</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MalaysiaMate | Elite Admissions</title>
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- React & ReactDOM (Development versions for easy single-file usage) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -24,17 +35,19 @@
                     fontFamily: {
                         sans: ['Tajawal', 'Montserrat', 'sans-serif'],
                         english: ['Montserrat', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
                     }
                 }
             }
         }
     </script>
-
     <style>
         body {
             font-family: 'Tajawal', sans-serif;
             scroll-behavior: smooth;
-            transition: font-family 0.3s ease;
+            background-color: #051126;
         }
         /* English Font Override */
         html[lang="en"] body {
@@ -52,29 +65,13 @@
             top: 0; left: 0; right: 0; bottom: 0;
             background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
             opacity: 0.1;
+            pointer-events: none;
         }
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-        .gold-border-btn {
-            border: 2px solid #C5A059;
-            color: #C5A059;
-            transition: all 0.3s ease;
-        }
-        .gold-border-btn:hover {
-            background: #C5A059;
-            color: #051126;
-        }
-        .whatsapp-pulse {
-            animation: pulse-green 2s infinite;
-        }
-        @keyframes pulse-green {
-            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-            70% { box-shadow: 0 0 0 20px rgba(34, 197, 94, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
         }
         .shimmer {
             background: linear-gradient(90deg, rgba(197,160,89,0) 0%, rgba(197,160,89,0.2) 50%, rgba(197,160,89,0) 100%);
@@ -85,315 +82,105 @@
             0% { background-position: -200% 0; }
             100% { background-position: 200% 0; }
         }
-        #mobile-menu {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .whatsapp-pulse {
+            animation: pulse-green 2s infinite;
         }
-        
-        /* Language specific utility to flip margins/padding if needed */
-        html[dir="ltr"] .rtl-space-x-reverse {
-            margin-left: -0.75rem; /* -space-x-3 */
-            margin-right: 0;
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #051126;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1A2B47;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C5A059;
         }
     </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
 </head>
-<body class="bg-primary text-slate-300 overflow-x-hidden">
+<body class="bg-primary text-slate-300 overflow-x-hidden antialiased">
+    <div id="root"></div>
 
-    <!-- Floating WhatsApp -->
-    <a href="https://wa.me/60186602976" target="_blank" class="whatsapp-pulse fixed bottom-6 left-6 md:bottom-8 md:left-8 z-[100] bg-success text-white w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
-        <i class="fab fa-whatsapp text-2xl md:text-3xl"></i>
-    </a>
+    <script type="text/babel" data-presets="typescript,react">
+        const { useState, useEffect, useCallback } = React;
 
-    <!-- Nav -->
-    <nav class="fixed top-0 w-full z-[100] bg-primary/95 backdrop-blur-md border-b border-white/5">
-        <div class="container mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
-            <!-- Logo Section -->
-            <div class="flex items-center gap-3">
-                <div class="relative group">
-                    <div class="absolute -inset-1 bg-secondary blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-                    <img src="malaysiamate.png" alt="Logo" class="relative w-10 h-10 md:w-12 md:h-12 object-contain rounded-lg" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3429/3429433.png'">
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-black text-xl md:text-2xl tracking-tight text-white uppercase leading-none">Malaysia<span class="text-secondary italic">Mate</span></span>
-                    <span class="text-[8px] md:text-[9px] text-secondary font-bold uppercase tracking-[0.3em] md:tracking-[0.4em]">Elite Admissions</span>
-                </div>
-            </div>
-            
-            <!-- Desktop Menu -->
-            <div class="hidden lg:flex items-center gap-8 text-[11px] font-black uppercase tracking-widest text-slate-400">
-                <a href="#about" class="hover:text-secondary transition-colors" data-i18n="nav_about">من نحن</a>
-                <a href="#services" class="hover:text-secondary transition-colors" data-i18n="nav_services">خدماتنا</a>
-                <a href="#contact" class="hover:text-secondary transition-colors" data-i18n="nav_contact">اتصل بنا</a>
-            </div>
+        // --- TYPES ---
+        type Language = 'AR' | 'EN';
 
-            <div class="flex items-center gap-3">
-                <!-- Language Switcher -->
-                <button onclick="toggleLanguage()" class="flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all border border-white/10">
-                    <i class="fas fa-globe text-secondary"></i>
-                    <span id="lang-text">English</span>
-                </button>
+        interface TranslationSchema {
+            nav_about: string;
+            nav_services: string;
+            nav_contact: string;
+            nav_cta: string;
+            mobile_cta: string;
+            hero_badge: string;
+            hero_title_1: string;
+            hero_title_2: string;
+            hero_desc: string;
+            hero_btn_primary: string;
+            hero_btn_secondary: string;
+            hero_social_proof: string;
+            hero_badge_visa: string;
+            services_subtitle: string;
+            services_title: string;
+            service_1_title: string;
+            service_1_desc: string;
+            service_2_title: string;
+            service_2_desc: string;
+            service_3_title: string;
+            service_3_desc: string;
+            why_title: string;
+            why_1_title: string;
+            why_1_desc: string;
+            why_2_title: string;
+            why_2_desc: string;
+            trusted_by: string;
+            partners_plus: string;
+            form_title: string;
+            form_desc: string;
+            form_point_1: string;
+            form_point_2: string;
+            label_name: string;
+            label_phone: string;
+            label_level: string;
+            input_placeholder_name: string;
+            input_placeholder_phone: string;
+            option_english: string;
+            option_bachelors: string;
+            option_masters: string;
+            form_submit: string;
+            whatsapp_message_start: string;
+            whatsapp_label_name: string;
+            whatsapp_label_phone: string;
+            whatsapp_label_level: string;
+        }
 
-                <a href="https://wa.me/60186602976" class="hidden sm:block bg-secondary text-primary px-5 py-2 rounded-full font-black text-xs md:text-sm hover:shadow-[0_0_20px_rgba(197,160,89,0.4)] transition-all" data-i18n="nav_cta">
-                    تواصل الآن
-                </a>
-                
-                <!-- Mobile Menu Toggle -->
-                <button id="menu-btn" class="lg:hidden text-white p-2 focus:outline-none" aria-label="Toggle Menu">
-                    <i id="menu-icon" class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
-        </div>
+        interface Translations {
+            ar: TranslationSchema;
+            en: TranslationSchema;
+        }
 
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="fixed inset-0 top-[60px] md:top-[70px] w-full h-[calc(100vh-60px)] bg-primary/98 z-[90] translate-x-full lg:hidden flex flex-col justify-center items-center px-6 py-12">
-            <div class="flex flex-col gap-8 text-center text-2xl font-bold uppercase tracking-widest text-white">
-                <a href="#about" class="mobile-link hover:text-secondary transition-colors" data-i18n="nav_about">من نحن</a>
-                <a href="#services" class="mobile-link hover:text-secondary transition-colors" data-i18n="nav_services">خدماتنا</a>
-                <a href="#contact" class="mobile-link hover:text-secondary transition-colors" data-i18n="nav_contact">اتصل بنا</a>
-                <div class="h-px bg-white/10 w-48 mx-auto"></div>
-                <a href="https://wa.me/60186602976" class="bg-secondary text-primary px-10 py-4 rounded-2xl text-lg" data-i18n="mobile_cta">تواصل واتساب</a>
-            </div>
-        </div>
-    </nav>
+        // --- CONSTANTS ---
+        const WHATSAPP_NUMBER = "60186602976";
 
-    <!-- Hero -->
-    <section class="hero-bg min-h-screen flex items-center pt-28 pb-12 px-4 md:px-6">
-        <div class="container mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div class="text-right space-y-6 md:space-y-8 order-2 lg:order-1 rtl:lg:text-right ltr:lg:text-left text-center lg:text-start" id="hero-text-container">
-                <div class="inline-flex items-center gap-3 bg-secondary/10 border border-secondary/20 px-4 py-2 rounded-full">
-                    <span class="w-2 h-2 bg-secondary rounded-full animate-ping"></span>
-                    <span class="text-[10px] md:text-xs font-bold text-secondary uppercase tracking-widest" data-i18n="hero_badge">وكيل معتمد لجامعات ماليزيا</span>
-                </div>
-                
-                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-tight">
-                    <span data-i18n="hero_title_1">مستقبلك يبدأ</span> <br>
-                    <span class="text-secondary shimmer inline-block px-2" data-i18n="hero_title_2">في ماليزيا</span>
-                </h1>
-                
-                <p class="text-slate-400 text-base md:text-lg lg:text-xl leading-relaxed max-w-xl ltr:mr-auto rtl:ml-auto" data-i18n="hero_desc">
-                    نحن نذلل الصعاب لنضعك في أرقى الجامعات العالمية. استشارات مجانية، قبولات سريعة، وخدمات متكاملة تضمن لك راحة البال والتركيز على دراستك.
-                </p>
-
-                <div class="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center lg:justify-start">
-                    <a href="https://wa.me/60186602976" class="bg-secondary text-primary px-8 md:px-12 py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-lg md:text-xl text-center shadow-xl hover:-translate-y-1 transition-all active:scale-95" data-i18n="hero_btn_primary">
-                        تواصل واتساب الآن
-                    </a>
-                    <a href="#about" class="gold-border-btn px-8 md:px-12 py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-lg md:text-xl text-center active:scale-95" data-i18n="hero_btn_secondary">
-                        لماذا نحن؟
-                    </a>
-                </div>
-
-                <div class="flex items-center gap-4 md:gap-6 pt-4 justify-center lg:justify-start">
-                    <div class="flex -space-x-3 rtl:space-x-reverse">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" class="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-primary object-cover" alt="Student">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" class="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-primary object-cover" alt="Student">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" class="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-primary object-cover" alt="Student">
-                    </div>
-                    <p class="text-[10px] md:text-xs font-bold text-slate-500 tracking-tighter uppercase" data-i18n="hero_social_proof">+1500 طالب حصلوا على قبولهم</p>
-                </div>
-            </div>
-
-            <!-- Hero Image -->
-            <div class="relative order-1 lg:order-2 flex justify-center">
-                <div class="absolute -top-10 -left-10 lg:-top-20 lg:-left-20 w-40 h-40 lg:w-64 lg:h-64 bg-secondary/10 rounded-full blur-[60px] lg:blur-[100px]"></div>
-                <div class="relative z-10 p-2 md:p-4 glass-card rounded-[2rem] md:rounded-[3rem] w-full max-w-[400px] lg:max-w-none">
-                    <img src="malaysiamate.png.jpg" class="w-full h-auto object-cover rounded-[1.8rem] md:rounded-[2.5rem]" onerror="this.src='https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&w=800&q=80'">
-                </div>
-                <!-- success badge -->
-                <div class="absolute -bottom-4 right-0 lg:bottom-10 lg:-right-10 bg-secondary p-4 lg:p-8 rounded-2xl lg:rounded-3xl shadow-2xl z-20 transform rotate-3 ltr:right-auto ltr:left-0 ltr:lg:-left-10 ltr:-rotate-3">
-                    <span class="text-2xl lg:text-4xl font-black text-primary block mb-1 leading-none">99%</span>
-                    <span class="text-[8px] lg:text-xs font-black text-primary/70 uppercase" data-i18n="hero_badge_visa">نسبة نجاح الفيزا</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services" class="py-16 md:py-32 px-4 md:px-6">
-        <div class="container mx-auto">
-            <div class="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-12 md:mb-20 gap-6 text-center lg:text-right ltr:lg:text-left">
-                <div class="max-w-xl">
-                    <span class="text-secondary font-black tracking-[0.4em] uppercase text-[10px] md:text-xs mb-3 block" data-i18n="services_subtitle">خدماتنا الشاملة</span>
-                    <h2 class="text-3xl md:text-5xl lg:text-6xl font-black text-white" data-i18n="services_title">طريقك للجامعة أصبح أسهل</h2>
-                </div>
-                <div class="hidden lg:block h-1 bg-secondary/20 flex-grow max-w-md rounded-full mb-4"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
-                <!-- Card 1 -->
-                <div class="glass-card p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] hover:bg-white/5 transition-all group border-t-2 border-transparent hover:border-secondary">
-                    <div class="w-14 h-14 md:w-20 md:h-20 bg-secondary/10 text-secondary rounded-xl md:rounded-[2rem] flex items-center justify-center mb-6 md:mb-8 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-university text-2xl md:text-4xl"></i>
-                    </div>
-                    <h3 class="text-xl md:text-2xl font-black mb-3 md:mb-4 text-white" data-i18n="service_1_title">القبول الجامعي</h3>
-                    <p class="text-slate-400 leading-relaxed text-sm md:text-base" data-i18n="service_1_desc">توفير قبولات في أقوى الجامعات الماليزية المعتمدة عالمياً بكفاءة عالية وبأقل وقت ممكن.</p>
-                </div>
-                <!-- Card 2 -->
-                <div class="glass-card p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] hover:bg-white/5 transition-all group border-t-2 border-transparent hover:border-secondary">
-                    <div class="w-14 h-14 md:w-20 md:h-20 bg-secondary/10 text-secondary rounded-xl md:rounded-[2rem] flex items-center justify-center mb-6 md:mb-8 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-language text-2xl md:text-4xl"></i>
-                    </div>
-                    <h3 class="text-xl md:text-2xl font-black mb-3 md:mb-4 text-white" data-i18n="service_2_title">معاهد اللغة</h3>
-                    <p class="text-slate-400 leading-relaxed text-sm md:text-base" data-i18n="service_2_desc">تسجيل في أقوى معاهد اللغة الإنجليزية لضمان وصولك للمستوى المطلوب قبل بدء الدراسة الجامعية.</p>
-                </div>
-                <!-- Card 3 -->
-                <div class="glass-card p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] hover:bg-white/5 transition-all group border-t-2 border-transparent hover:border-secondary">
-                    <div class="w-14 h-14 md:w-20 md:h-20 bg-secondary/10 text-secondary rounded-xl md:rounded-[2rem] flex items-center justify-center mb-6 md:mb-8 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-passport text-2xl md:text-4xl"></i>
-                    </div>
-                    <h3 class="text-xl md:text-2xl font-black mb-3 md:mb-4 text-white" data-i18n="service_3_title">إجراءات الفيزا</h3>
-                    <p class="text-slate-400 leading-relaxed text-sm md:text-base" data-i18n="service_3_desc">فريق مختص يتابع ملف التأشيرة الخاص بك مع دائرة الهجرة الماليزية لضمان القبول السلس.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Us -->
-    <section id="about" class="py-16 md:py-32 bg-accent/30 px-4 md:px-6 border-y border-white/5">
-        <div class="container mx-auto grid lg:grid-cols-2 gap-10 md:gap-24 items-center">
-            <div class="space-y-8 md:space-y-12 order-2 lg:order-1">
-                <h2 class="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-tight" data-i18n="why_title">لماذا يختارنا الطلاب؟</h2>
-                <div class="grid gap-6 md:gap-8">
-                    <div class="flex gap-4 md:gap-6 items-start">
-                        <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-secondary flex items-center justify-center shrink-0">
-                            <i class="fas fa-user-check text-primary text-lg md:text-2xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2 text-right ltr:text-left" data-i18n="why_1_title">متابعة شخصية</h4>
-                            <p class="text-slate-400 text-sm md:text-base text-right ltr:text-left" data-i18n="why_1_desc">لست مجرد رقم عندنا، نحن معك في كل خطوة حتى تستقر في غرفتك الجامعية.</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-4 md:gap-6 items-start">
-                        <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-secondary flex items-center justify-center shrink-0">
-                            <i class="fas fa-handshake text-primary text-lg md:text-2xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2 text-right ltr:text-left" data-i18n="why_2_title">شفافية كاملة</h4>
-                            <p class="text-slate-400 text-sm md:text-base text-right ltr:text-left" data-i18n="why_2_desc">لا توجد رسوم مخفية، نوضح لك التكاليف الحقيقية للسكن والمعيشة والدراسة بكل صدق.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="relative mt-8 lg:mt-0 order-1 lg:order-2">
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="Community" class="rounded-[2rem] md:rounded-[4rem] shadow-3xl w-full">
-                <div class="absolute inset-0 bg-secondary/10 rounded-[2rem] md:rounded-[4rem] -rotate-3 -z-10"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Trusted Partners Strip -->
-    <section class="py-12 md:py-24 px-4 md:px-6">
-        <div class="container mx-auto overflow-hidden">
-            <div class="text-center mb-8 md:mb-16">
-                <p class="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.3em] md:tracking-[0.4em] text-slate-400" data-i18n="trusted_by">
-                    Trusted by leading institutions
-                </p>
-            </div>
-            <!-- Flexible wrapping logos -->
-            <div class="flex flex-wrap items-center justify-center gap-6 md:gap-16 grayscale opacity-60">
-                <div class="px-4 py-2 bg-white/5 rounded-lg text-white font-bold text-lg">Sheffield</div>
-                <div class="px-4 py-2 bg-white/5 rounded-lg text-white font-bold text-lg">EMS</div>
-                <div class="px-4 py-2 bg-white/5 rounded-lg text-white font-bold text-lg">Manchester</div>
-                <div class="px-4 py-2 bg-white/5 rounded-lg text-white font-bold text-lg">APU</div>
-                <span class="text-xs md:text-base font-medium text-slate-400 tracking-wide" data-i18n="partners_plus">+40 institutions</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Application Form -->
-    <section id="contact" class="py-12 md:py-32 px-4 md:px-6">
-        <div class="container mx-auto max-w-6xl">
-            <div class="glass-card rounded-[2rem] md:rounded-[4rem] overflow-hidden flex flex-col lg:flex-row shadow-inner border border-white/5">
-                <!-- Info Side -->
-                <div class="lg:w-1/2 p-8 md:p-16 bg-accent/50 flex flex-col justify-center text-right ltr:text-left">
-                    <h2 class="text-3xl md:text-4xl font-black text-white mb-4 md:mb-6" data-i18n="form_title">سجل اهتمامك الآن</h2>
-                    <p class="text-slate-400 mb-6 md:mb-12 text-base md:text-lg" data-i18n="form_desc">سيتواصل معك مستشارك التعليمي خلال 24 ساعة لتقديم خطة دراسية كاملة تناسب طموحك.</p>
-                    <div class="space-y-4 md:space-y-6">
-                        <div class="flex items-center gap-4 justify-start flex-row-reverse ltr:flex-row">
-                            <i class="fas fa-check-circle text-secondary"></i>
-                            <span class="font-bold text-sm md:text-base" data-i18n="form_point_1">استشارة أكاديمية احترافية مجانية</span>
-                        </div>
-                        <div class="flex items-center gap-4 justify-start flex-row-reverse ltr:flex-row">
-                            <i class="fas fa-check-circle text-secondary"></i>
-                            <span class="font-bold text-sm md:text-base" data-i18n="form_point_2">تحديد الميزانية وخيارات السكن</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Form Side -->
-                <div class="lg:w-1/2 p-8 md:p-16">
-                    <form id="whatsappForm" class="space-y-6 md:space-y-8">
-                        <div>
-                            <label class="block text-[10px] font-black text-secondary uppercase tracking-widest mb-2 md:mb-3 text-right ltr:text-left" data-i18n="label_name">الاسم الكامل</label>
-                            <input id="userName" type="text" required data-placeholder="input_placeholder_name" placeholder="مثال: أحمد محمد"
-                                class="w-full bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-5 md:px-6 py-4 outline-none focus:border-secondary transition-colors text-white text-sm md:text-base text-right ltr:text-left">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-black text-secondary uppercase tracking-widest mb-2 md:mb-3 text-right ltr:text-left" data-i18n="label_phone">رقم الواتساب</label>
-                            <input id="userPhone" type="tel" required data-placeholder="input_placeholder_phone" placeholder="+966 5xxxxxxxx"
-                                class="w-full bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-5 md:px-6 py-4 outline-none focus:border-secondary transition-colors text-white text-sm md:text-base text-left ltr:text-left" dir="ltr">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-black text-secondary uppercase tracking-widest mb-2 md:mb-3 text-right ltr:text-left" data-i18n="label_level">المستوى التعليمي</label>
-                            <select id="userLevel" class="w-full bg-[#0D2142] border border-white/10 rounded-xl md:rounded-2xl px-5 md:px-6 py-4 outline-none focus:border-secondary transition-colors text-white text-sm md:text-base text-right ltr:text-left appearance-none">
-                                <option value="english" data-i18n="option_english">لغة إنجليزية</option>
-                                <option value="bachelors" data-i18n="option_bachelors">بكالوريوس</option>
-                                <option value="masters_phd" data-i18n="option_masters">ماجستير / دكتوراة</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="w-full bg-secondary text-primary py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-lg md:text-xl hover:brightness-110 shadow-lg shadow-secondary/20 transition-all active:scale-95" data-i18n="form_submit">
-                            إرسال الطلب عبر واتساب
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-   <!-- Footer -->
-<footer class="py-12 md:py-20 px-4 md:px-6 border-t-2 border-white/10">
-    <div class="container mx-auto">
-        <div class="flex flex-col lg:flex-row justify-between items-center gap-10 md:gap-12 mb-12 md:mb-16">
-
-            <!-- Logo -->
-            <div class="flex items-center gap-3">
-                <img src="malaysiamate.png" alt="Logo" class="w-10 h-10 object-contain"
-                     onerror="this.src='https://cdn-icons-png.flaticon.com/512/3429/3429433.png'">
-                <span class="text-xl font-black text-white uppercase leading-none">
-                    Malaysia<span class="text-secondary italic">Mate</span>
-                </span>
-            </div>
-
-            <!-- Social Links -->
-            <div class="flex gap-6 md:gap-10 text-slate-500 font-bold uppercase text-[10px] md:text-xs tracking-widest">
-                <a href="https://www.instagram.com/Malaysiamate" target="_blank"
-                   class="hover:text-secondary transition-colors">Instagram</a>
-
-                <a href="https://www.tiktok.com/@malaysiamate" target="_blank"
-                   class="hover:text-secondary transition-colors">TikTok</a>
-
-                <a href="https://www.snapchat.com/@malaysiamate" target="_blank"
-                   class="hover:text-secondary transition-colors">Snapchat</a>
-
-                <a href="https://x.com/MyMalaysiamate" target="_blank"
-                   class="hover:text-secondary transition-colors">X</a>
-
-                <a href="https://linktr.ee/Malaysiamate" target="_blank"
-                   class="hover:text-secondary transition-colors">Linktree</a>
-            </div>
-
-            <!-- Copyright -->
-            <p class="text-slate-500 text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.4em] text-center">
-                &copy; 2026 MALAYSIA MATE PRO. WORLD CLASS ADMISSIONS.
-            </p>
-
-        </div>
-    </div>
-</footer>
-
-
-    <script>
-        // --- Translation Data ---
-        const translations = {
+        const TRANSLATIONS: Translations = {
             ar: {
                 nav_about: "من نحن",
                 nav_services: "خدماتنا",
@@ -490,130 +277,639 @@
             }
         };
 
-        let currentLang = localStorage.getItem('site_lang') || 'ar';
+        // --- COMPONENTS ---
 
-        function updateContent() {
-            const t = translations[currentLang];
-            
-            // Text Content
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (t[key]) {
-                    element.innerText = t[key];
-                }
-            });
+        // 1. FloatingWhatsapp
+        const FloatingWhatsapp = () => {
+          return (
+            <a 
+              href={`https://wa.me/${WHATSAPP_NUMBER}`} 
+              target="_blank" 
+              rel="noreferrer"
+              aria-label="Contact on WhatsApp"
+              className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[100] group flex items-center justify-center"
+            >
+              {/* Pulse Effect */}
+              <div className="absolute inset-0 bg-success rounded-full animate-ping opacity-75 group-hover:opacity-100 transition-opacity"></div>
+              
+              {/* Button */}
+              <div className="relative bg-success text-white w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-2xl shadow-success/50 transform transition-transform duration-300 hover:scale-110 hover:rotate-12 cursor-pointer border-2 border-white/20">
+                <i className="fab fa-whatsapp text-3xl md:text-4xl filter drop-shadow-md"></i>
+              </div>
+            </a>
+          );
+        };
 
-            // Input Placeholders
-            document.querySelectorAll('[data-placeholder]').forEach(element => {
-                const key = element.getAttribute('data-placeholder');
-                if (t[key]) {
-                    element.setAttribute('placeholder', t[key]);
-                }
-            });
+        // 2. Footer
+        const Footer = () => {
+          return (
+            <footer className="py-12 md:py-20 px-4 md:px-6 border-t-2 border-white/10 bg-primary">
+              <div className="container mx-auto">
+                <div className="flex flex-col lg:flex-row justify-between items-center gap-10 md:gap-12 mb-12 md:mb-16">
+                  
+                  {/* Logo */}
+                  <div className="flex items-center gap-3 select-none opacity-90 hover:opacity-100 transition-opacity">
+                    <img 
+                      src="malaysiamate.png.jpg" 
+                      alt="MalaysiaMate Logo" 
+                      className="w-10 h-10 object-cover rounded-lg"
+                      onError={(e) => {
+                        const target = e.target;
+                        target.src = 'https://cdn-icons-png.flaticon.com/512/3429/3429433.png';
+                      }}
+                    />
+                    <span className="text-xl font-black text-white uppercase leading-none">
+                      Malaysia<span className="text-secondary italic">Mate</span>
+                    </span>
+                  </div>
 
-            // Direction and Language Attribute
-            document.documentElement.lang = currentLang;
-            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+                  {/* Social Links */}
+                  <div className="flex flex-wrap justify-center gap-6 md:gap-10 text-slate-500 font-bold uppercase text-[10px] md:text-xs tracking-widest">
+                    {[
+                        { name: 'Instagram', url: 'https://www.instagram.com/Malaysiamate' },
+                        { name: 'TikTok', url: 'https://www.tiktok.com/@malaysiamate' },
+                        { name: 'Snapchat', url: 'https://www.snapchat.com/@malaysiamate' },
+                        { name: 'X', url: 'https://x.com/MyMalaysiamate' },
+                        { name: 'Linktree', url: 'https://linktr.ee/Malaysiamate' }
+                    ].map(social => (
+                        <a 
+                            key={social.name}
+                            href={social.url} 
+                            target="_blank" 
+                            rel="noreferrer"
+                            className="hover:text-secondary transition-colors hover:scale-110"
+                        >
+                            {social.name}
+                        </a>
+                    ))}
+                  </div>
+                  
+                  {/* Copyright */}
+                  <p className="text-slate-500 text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.4em] text-center">
+                    &copy; 2026 MALAYSIA MATE PRO. WORLD CLASS ADMISSIONS.
+                  </p>
+                </div>
+              </div>
+            </footer>
+          );
+        };
 
-            // Toggle Button Text
-            const langBtnText = document.getElementById('lang-text');
-            langBtnText.innerText = currentLang === 'ar' ? 'English' : 'العربية';
-            
-            // Adjust text alignment classes dynamically if needed, 
-            // though Tailwind's 'rtl/ltr' prefixes handle most logic in HTML.
-            
-            // Save preference
-            localStorage.setItem('site_lang', currentLang);
-        }
+        // 3. Contact
+        const Contact = ({ t, language }) => {
+          const [formData, setFormData] = useState({
+            name: '',
+            phone: '',
+            level: 'english'
+          });
 
-        function toggleLanguage() {
-            currentLang = currentLang === 'ar' ? 'en' : 'ar';
-            updateContent();
-        }
-
-        // Initialize
-        updateContent();
-
-
-        // --- Mobile Menu Toggle ---
-        const menuBtn = document.getElementById('menu-btn');
-        const menuIcon = document.getElementById('menu-icon');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-
-        function toggleMenu() {
-            const isOpen = !mobileMenu.classList.contains('translate-x-full');
-            if (isOpen) {
-                // Close it
-                mobileMenu.classList.add('translate-x-full');
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-                document.body.style.overflow = '';
-            } else {
-                // Open it
-                mobileMenu.classList.remove('translate-x-full');
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-times');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        menuBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleMenu();
-        });
-
-        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
-
-        // Close menu if clicking outside
-        document.addEventListener('click', (e) => {
-            const isOpen = !mobileMenu.classList.contains('translate-x-full');
-            if (isOpen && !mobileMenu.contains(e.target) && e.target !== menuBtn) {
-                toggleMenu();
-            }
-        });
-
-        // --- WhatsApp Form Handler ---
-        document.getElementById('whatsappForm').addEventListener('submit', function (e) {
+          const handleSubmit = useCallback((e) => {
             e.preventDefault();
-
-            const t = translations[currentLang];
-            const name = document.getElementById('userName').value.trim();
-            const phone = document.getElementById('userPhone').value.trim();
             
-            // Get selected text from dropdown
-            const levelSelect = document.getElementById('userLevel');
-            const levelText = levelSelect.options[levelSelect.selectedIndex].text;
+            // Get label for selected level
+            const levelElement = document.getElementById('userLevel');
+            const levelText = levelElement ? levelElement.options[levelElement.selectedIndex].text : formData.level;
 
-            const text = `${t.whatsapp_message_start}:\n\n- ${t.whatsapp_label_name}: ${name}\n- ${t.whatsapp_label_phone}: ${phone}\n- ${t.whatsapp_label_level}: ${levelText}`;
+            const text = `${t.whatsapp_message_start}:\n\n- ${t.whatsapp_label_name}: ${formData.name}\n- ${t.whatsapp_label_phone}: ${formData.phone}\n- ${t.whatsapp_label_level}: ${levelText}`;
             const encodedText = encodeURIComponent(text);
             
-            const whatsappNumber = '60186602976'; 
-            const url = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
-            
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedText}`;
             window.open(url, '_blank');
-        });
+          }, [formData, t]);
 
-        // --- Smooth Scroll Fix for Fixed Header ---
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                e.preventDefault();
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    const headerOffset = 80;
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    });
-                }
+          const handleChange = (e) => {
+            setFormData({
+              ...formData,
+              [e.target.name]: e.target.value
             });
-        });
+          };
+
+          return (
+            <section id="contact" className="py-12 md:py-32 px-4 md:px-6">
+              <div className="container mx-auto max-w-6xl">
+                <div className="glass-card rounded-[2rem] md:rounded-[4rem] overflow-hidden flex flex-col lg:flex-row shadow-inner border border-white/5">
+                  
+                  {/* Info Side */}
+                  <div className={`lg:w-1/2 p-8 md:p-16 bg-accent/50 flex flex-col justify-center ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                    <h2 className="text-3xl md:text-4xl font-black text-white mb-4 md:mb-6">
+                      {t.form_title}
+                    </h2>
+                    <p className="text-slate-400 mb-6 md:mb-12 text-base md:text-lg">
+                      {t.form_desc}
+                    </p>
+                    <div className="space-y-4 md:space-y-6">
+                      <div className={`flex items-center gap-4 justify-start ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+                        <i className="fas fa-check-circle text-secondary text-xl"></i>
+                        <span className="font-bold text-sm md:text-base text-slate-200">{t.form_point_1}</span>
+                      </div>
+                      <div className={`flex items-center gap-4 justify-start ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
+                        <i className="fas fa-check-circle text-secondary text-xl"></i>
+                        <span className="font-bold text-sm md:text-base text-slate-200">{t.form_point_2}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Form Side */}
+                  <div className="lg:w-1/2 p-8 md:p-16 relative">
+                     {/* Decorative glow */}
+                     <div className="absolute top-0 right-0 w-full h-full bg-secondary/5 blur-3xl -z-10 pointer-events-none"></div>
+
+                    <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8 relative z-10">
+                      <div>
+                        <label className={`block text-[10px] font-black text-secondary uppercase tracking-widest mb-2 md:mb-3 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                          {t.label_name}
+                        </label>
+                        <input 
+                          type="text" 
+                          name="name"
+                          required 
+                          placeholder={t.input_placeholder_name}
+                          value={formData.name}
+                          onChange={handleChange}
+                          className={`w-full bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-5 md:px-6 py-4 outline-none focus:border-secondary focus:bg-white/10 transition-colors text-white text-sm md:text-base ${language === 'ar' ? 'text-right' : 'text-left'}`}
+                        />
+                      </div>
+                      <div>
+                        <label className={`block text-[10px] font-black text-secondary uppercase tracking-widest mb-2 md:mb-3 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                          {t.label_phone}
+                        </label>
+                        <input 
+                          type="tel" 
+                          name="phone"
+                          required 
+                          dir="ltr"
+                          placeholder={t.input_placeholder_phone}
+                          value={formData.phone}
+                          onChange={handleChange}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-5 md:px-6 py-4 outline-none focus:border-secondary focus:bg-white/10 transition-colors text-white text-sm md:text-base text-left"
+                        />
+                      </div>
+                      <div>
+                        <label className={`block text-[10px] font-black text-secondary uppercase tracking-widest mb-2 md:mb-3 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                          {t.label_level}
+                        </label>
+                        <div className="relative">
+                            <select 
+                            id="userLevel"
+                            name="level"
+                            value={formData.level}
+                            onChange={handleChange}
+                            className={`w-full bg-[#0D2142] border border-white/10 rounded-xl md:rounded-2xl px-5 md:px-6 py-4 outline-none focus:border-secondary transition-colors text-white text-sm md:text-base appearance-none cursor-pointer ${language === 'ar' ? 'text-right' : 'text-left'}`}
+                            >
+                            <option value="english">{t.option_english}</option>
+                            <option value="bachelors">{t.option_bachelors}</option>
+                            <option value="masters_phd">{t.option_masters}</option>
+                            </select>
+                            <div className={`absolute top-1/2 -translate-y-1/2 pointer-events-none text-secondary ${language === 'ar' ? 'left-6' : 'right-6'}`}>
+                                <i className="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </div>
+                      </div>
+                      <button 
+                        type="submit" 
+                        className="w-full bg-secondary text-primary py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-lg md:text-xl hover:brightness-110 shadow-lg shadow-secondary/20 transition-all active:scale-95 flex justify-center items-center gap-2"
+                      >
+                        <i className="fab fa-whatsapp text-2xl"></i>
+                        {t.form_submit}
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </section>
+          );
+        };
+
+        // 4. Partners
+        const Partners = ({ t }) => {
+          return (
+            <section className="py-12 md:py-24 px-4 md:px-6 border-b border-white/5 bg-primary">
+              <div className="container mx-auto overflow-hidden">
+                <div className="text-center mb-8 md:mb-16">
+                  <p className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.3em] md:tracking-[0.4em] text-slate-400">
+                    {t.trusted_by}
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center justify-center gap-4 md:gap-16 grayscale opacity-60">
+                    {['Sheffield', 'EMS', 'Manchester', 'APU'].map((uni) => (
+                        <div key={uni} className="px-6 py-3 bg-white/5 rounded-xl text-white font-bold text-lg border border-white/5 hover:bg-white/10 hover:opacity-100 transition-all cursor-default">
+                            {uni}
+                        </div>
+                    ))}
+                  <span className="text-xs md:text-base font-medium text-slate-400 tracking-wide px-4">
+                    {t.partners_plus}
+                  </span>
+                </div>
+              </div>
+            </section>
+          );
+        };
+
+        // 5. About
+        const About = ({ t, language }) => {
+          return (
+            <section id="about" className="py-16 md:py-32 bg-accent/30 px-4 md:px-6 border-y border-white/5">
+              <div className="container mx-auto grid lg:grid-cols-2 gap-10 md:gap-24 items-center">
+                {/* Text Content */}
+                <div className={`space-y-8 md:space-y-12 order-2 lg:order-1 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                  <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
+                    {t.why_title}
+                  </h2>
+                  <div className="grid gap-6 md:gap-8">
+                    <div className="flex gap-4 md:gap-6 items-start">
+                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-secondary flex items-center justify-center shrink-0 shadow-lg shadow-secondary/10">
+                        <i className="fas fa-user-check text-primary text-lg md:text-2xl"></i>
+                      </div>
+                      <div>
+                        <h4 className="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">
+                          {t.why_1_title}
+                        </h4>
+                        <p className="text-slate-400 text-sm md:text-base">
+                          {t.why_1_desc}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex gap-4 md:gap-6 items-start">
+                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-secondary flex items-center justify-center shrink-0 shadow-lg shadow-secondary/10">
+                        <i className="fas fa-handshake text-primary text-lg md:text-2xl"></i>
+                      </div>
+                      <div>
+                        <h4 className="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">
+                          {t.why_2_title}
+                        </h4>
+                        <p className="text-slate-400 text-sm md:text-base">
+                          {t.why_2_desc}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Image Content */}
+                <div className="relative mt-8 lg:mt-0 order-1 lg:order-2 group">
+                  <img 
+                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" 
+                    alt="Community" 
+                    className="rounded-[2rem] md:rounded-[4rem] shadow-3xl w-full transform transition-transform duration-700 group-hover:scale-[1.02]" 
+                  />
+                  <div className="absolute inset-0 bg-secondary/10 rounded-[2rem] md:rounded-[4rem] -rotate-3 -z-10 transition-transform duration-700 group-hover:rotate-0"></div>
+                </div>
+              </div>
+            </section>
+          );
+        };
+
+        // 6. Services
+        const Services = ({ t, language }) => {
+          return (
+            <section id="services" className="py-16 md:py-32 px-4 md:px-6 relative z-10">
+              <div className="container mx-auto">
+                <div className={`flex flex-col lg:flex-row justify-between items-center lg:items-end mb-12 md:mb-20 gap-6 text-center ${language === 'ar' ? 'lg:text-right' : 'lg:text-left'}`}>
+                  <div className="max-w-xl">
+                    <span className="text-secondary font-black tracking-[0.4em] uppercase text-[10px] md:text-xs mb-3 block">
+                      {t.services_subtitle}
+                    </span>
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white">
+                      {t.services_title}
+                    </h2>
+                  </div>
+                  <div className="hidden lg:block h-1 bg-secondary/20 flex-grow max-w-md rounded-full mb-4 mx-8"></div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+                  {[
+                    { icon: "fa-university", title: t.service_1_title, desc: t.service_1_desc },
+                    { icon: "fa-language", title: t.service_2_title, desc: t.service_2_desc },
+                    { icon: "fa-passport", title: t.service_3_title, desc: t.service_3_desc },
+                  ].map((service, idx) => (
+                    <div key={idx} className="glass-card p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] hover:bg-white/5 transition-all group border-t-2 border-transparent hover:border-secondary flex flex-col items-center text-center lg:items-start lg:text-start">
+                      <div className="w-14 h-14 md:w-20 md:h-20 bg-secondary/10 text-secondary rounded-xl md:rounded-[2rem] flex items-center justify-center mb-6 md:mb-8 group-hover:scale-110 transition-transform duration-300">
+                        <i className={`fas ${service.icon} text-2xl md:text-4xl`}></i>
+                      </div>
+                      <h3 className="text-xl md:text-2xl font-black mb-3 md:mb-4 text-white">
+                        {service.title}
+                      </h3>
+                      <p className="text-slate-400 leading-relaxed text-sm md:text-base">
+                        {service.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          );
+        };
+
+        // 7. Hero
+        const Hero = ({ t, language }) => {
+          return (
+            <section className="hero-bg min-h-screen flex items-center pt-32 pb-12 px-4 md:px-6 relative">
+              <div className="container mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                {/* Text Content */}
+                <div className={`space-y-6 md:space-y-8 order-2 lg:order-1 flex flex-col ${language === 'ar' ? 'lg:items-start text-right lg:text-right' : 'lg:items-start text-left lg:text-left'} items-center text-center`}>
+                  
+                  <div className="inline-flex items-center gap-3 bg-secondary/10 border border-secondary/20 px-4 py-2 rounded-full backdrop-blur-md">
+                    <span className="w-2 h-2 bg-secondary rounded-full animate-ping"></span>
+                    <span className="text-[10px] md:text-xs font-bold text-secondary uppercase tracking-widest">
+                      {t.hero_badge}
+                    </span>
+                  </div>
+                  
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[1.1] drop-shadow-xl">
+                    <span>{t.hero_title_1}</span> <br />
+                    <span className="text-secondary shimmer inline-block px-1">
+                      {t.hero_title_2}
+                    </span>
+                  </h1>
+                  
+                  <p className="text-slate-400 text-base md:text-lg lg:text-xl leading-relaxed max-w-xl font-medium">
+                    {t.hero_desc}
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row gap-4 md:gap-6 w-full sm:w-auto">
+                    <a 
+                      href={`https://wa.me/${WHATSAPP_NUMBER}`} 
+                      target="_blank"
+                      rel="noreferrer"
+                      className="bg-secondary text-primary px-8 md:px-12 py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-lg md:text-xl text-center shadow-[0_10px_30px_-10px_rgba(197,160,89,0.5)] hover:shadow-[0_20px_40px_-10px_rgba(197,160,89,0.6)] hover:-translate-y-1 transition-all active:scale-95 flex items-center justify-center gap-3"
+                    >
+                      <i className="fab fa-whatsapp text-2xl"></i>
+                      {t.hero_btn_primary}
+                    </a>
+                    <a 
+                      href="#about" 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      className="group border-2 border-secondary/50 text-secondary hover:bg-secondary hover:text-primary transition-all duration-300 px-8 md:px-12 py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-lg md:text-xl text-center active:scale-95 backdrop-blur-sm"
+                    >
+                      <span>{t.hero_btn_secondary}</span>
+                    </a>
+                  </div>
+
+                  <div className="flex items-center gap-4 md:gap-6 pt-4 bg-white/5 p-4 rounded-2xl border border-white/5 backdrop-blur-sm">
+                    <div className={`flex -space-x-3 ${language === 'ar' ? 'space-x-reverse' : ''}`}>
+                      {[
+                        "https://images.unsplash.com/photo-1534528741775-53994a69daeb",
+                        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+                        "https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+                      ].map((url, i) => (
+                        <img 
+                          key={i} 
+                          src={`${url}?auto=format&fit=crop&w=100&q=80`} 
+                          className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-primary object-cover ring-2 ring-white/10" 
+                          alt="Student" 
+                        />
+                      ))}
+                    </div>
+                    <div className="flex flex-col">
+                        <span className="font-black text-white text-lg leading-none">+1500</span>
+                        <span className="text-[10px] md:text-xs font-bold text-slate-400 tracking-tighter uppercase">
+                        {t.hero_social_proof}
+                        </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Hero Image */}
+                <div className="relative order-1 lg:order-2 flex justify-center w-full mt-8 lg:mt-0">
+                    <div className="absolute -top-10 -left-10 lg:-top-20 lg:-left-20 w-40 h-40 lg:w-64 lg:h-64 bg-secondary/20 rounded-full blur-[60px] lg:blur-[100px] animate-pulse"></div>
+                    <div className="relative z-10 p-2 md:p-3 glass-card rounded-[2rem] md:rounded-[3rem] w-full max-w-[320px] sm:max-w-[400px] lg:max-w-none transform hover:scale-[1.02] transition-transform duration-500 shadow-2xl shadow-black/50">
+                        <img 
+                          src="malaysiamate.png.jpg" 
+                          className="w-full h-auto object-cover rounded-[1.8rem] md:rounded-[2.8rem] shadow-inner" 
+                          alt="MalaysiaMate"
+                          onError={(e) => {
+                            const target = e.target;
+                            target.src = 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80';
+                          }}
+                        />
+                    </div>
+                    {/* Success Badge */}
+                    <div className={`absolute -bottom-4 ${language === 'ar' ? 'right-4 lg:-right-10 rotate-3' : 'left-4 lg:-left-10 -rotate-3'} bg-secondary p-4 lg:p-6 rounded-2xl lg:rounded-3xl shadow-2xl z-20 border-4 border-primary/50`}>
+                        <div className="flex items-center gap-3">
+                            <div className="bg-primary/10 p-2 rounded-full">
+                                <i className="fas fa-check-circle text-primary text-2xl lg:text-3xl"></i>
+                            </div>
+                            <div>
+                                <span className="text-xl lg:text-3xl font-black text-primary block mb-0.5 leading-none">99%</span>
+                                <span className="text-[8px] lg:text-[10px] font-black text-primary/80 uppercase tracking-wide">
+                                {t.hero_badge_visa}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </section>
+          );
+        };
+
+        // 8. Navbar
+        const Navbar = ({ language, setLanguage, t }) => {
+          const [isOpen, setIsOpen] = useState(false);
+          const [scrolled, setScrolled] = useState(false);
+
+          // Handle scroll effect for transparency
+          useEffect(() => {
+            const handleScroll = () => {
+              setScrolled(window.scrollY > 20);
+            };
+            window.addEventListener('scroll', handleScroll);
+            return () => window.removeEventListener('scroll', handleScroll);
+          }, []);
+
+          // Lock body scroll when menu is open
+          useEffect(() => {
+            if (isOpen) {
+              document.body.style.overflow = 'hidden';
+            } else {
+              document.body.style.overflow = 'unset';
+            }
+          }, [isOpen]);
+
+          const toggleLanguage = () => {
+            setLanguage(language === 'ar' ? 'en' : 'ar');
+          };
+
+          const navLinkClick = (id) => {
+            setIsOpen(false);
+            const element = document.getElementById(id);
+            if (element) {
+              const headerOffset = 80;
+              const elementPosition = element.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+              });
+            }
+          };
+
+          return (
+            <>
+              <nav className={`fixed top-0 w-full z-[90] transition-all duration-300 ${scrolled ? 'bg-primary/95 backdrop-blur-md shadow-lg border-b border-white/5 py-2' : 'bg-transparent py-4'}`}>
+                <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
+                  
+                  {/* Logo Section */}
+                  <div className="flex items-center gap-3">
+                    <div className="relative group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                      <div className="absolute -inset-1 bg-secondary blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                      {/* Updated Logo to malaysiamate.png.jpg */}
+                      <img 
+                        src="malaysiamate.png.jpg" 
+                        alt="MalaysiaMate Logo" 
+                        className="relative w-12 h-12 md:w-14 md:h-14 object-cover rounded-xl border border-white/10" 
+                        onError={(e) => {
+                            const target = e.target;
+                            target.src = 'https://cdn-icons-png.flaticon.com/512/3429/3429433.png';
+                        }}
+                      />
+                    </div>
+                    <div className="flex flex-col select-none">
+                      <span className="font-black text-lg md:text-2xl tracking-tight text-white uppercase leading-none">
+                        Malaysia<span className="text-secondary italic">Mate</span>
+                      </span>
+                      <span className="text-[9px] md:text-[10px] text-secondary font-bold uppercase tracking-[0.2em] md:tracking-[0.4em]">
+                        Elite Admissions
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Desktop Menu */}
+                  <div className="hidden lg:flex items-center gap-8 text-[11px] font-black uppercase tracking-widest text-slate-400">
+                    <button onClick={() => navLinkClick('about')} className="hover:text-secondary transition-colors py-2">{t.nav_about}</button>
+                    <button onClick={() => navLinkClick('services')} className="hover:text-secondary transition-colors py-2">{t.nav_services}</button>
+                    <button onClick={() => navLinkClick('contact')} className="hover:text-secondary transition-colors py-2">{t.nav_contact}</button>
+                  </div>
+
+                  {/* Controls Section */}
+                  <div className="flex items-center gap-3">
+                    
+                    {/* Language Switcher - Improved Touch Target */}
+                    <button 
+                      onClick={toggleLanguage} 
+                      className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2 rounded-full md:rounded-lg text-xs font-bold transition-all border border-white/10 active:scale-95 shadow-sm"
+                      aria-label="Toggle Language"
+                    >
+                      <i className="fas fa-globe text-secondary text-sm"></i>
+                      <span className="hidden md:inline">{language === 'ar' ? 'English' : 'العربية'}</span>
+                      <span className="inline md:hidden uppercase text-[10px]">{language === 'ar' ? 'EN' : 'AR'}</span>
+                    </button>
+
+                    {/* Desktop CTA */}
+                    <a 
+                      href={`https://wa.me/${WHATSAPP_NUMBER}`} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="hidden lg:block bg-secondary text-primary px-6 py-2.5 rounded-full font-black text-sm hover:shadow-[0_0_20px_rgba(197,160,89,0.4)] transition-all hover:-translate-y-0.5 active:scale-95"
+                    >
+                      {t.nav_cta}
+                    </a>
+                    
+                    {/* Mobile Menu Toggle - Larger Touch Target */}
+                    <button 
+                      onClick={() => setIsOpen(!isOpen)} 
+                      className="lg:hidden bg-white/5 border border-white/10 text-secondary w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 focus:outline-none transition-all active:scale-90" 
+                      aria-label="Toggle Menu"
+                    >
+                      <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'} text-lg transition-all duration-300 ${isOpen ? 'rotate-90 text-red-400' : ''}`}></i>
+                    </button>
+                  </div>
+                </div>
+              </nav>
+
+              {/* Mobile Menu Overlay */}
+              <div 
+                className={`fixed inset-0 top-0 w-full h-[100dvh] bg-primary/98 backdrop-blur-xl z-[88] flex flex-col justify-center items-center px-6 transition-all duration-500 cubic-bezier(0.4, 0, 0.2, 1) ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}
+              >
+                <div className="w-full max-w-sm flex flex-col gap-6 text-center">
+                    {/* Menu Header */}
+                    <div className="absolute top-6 left-0 w-full px-6 flex justify-between items-center opacity-50">
+                        <span className="text-sm font-bold tracking-widest text-slate-500">MENU</span>
+                    </div>
+
+                    <div className="flex flex-col gap-4 text-xl font-black uppercase tracking-widest text-white">
+                        <button 
+                            onClick={() => navLinkClick('about')} 
+                            className="py-4 border-b border-white/5 hover:text-secondary hover:border-secondary/30 transition-all w-full active:bg-white/5 rounded-xl"
+                        >
+                            {t.nav_about}
+                        </button>
+                        <button 
+                            onClick={() => navLinkClick('services')} 
+                            className="py-4 border-b border-white/5 hover:text-secondary hover:border-secondary/30 transition-all w-full active:bg-white/5 rounded-xl"
+                        >
+                            {t.nav_services}
+                        </button>
+                        <button 
+                            onClick={() => navLinkClick('contact')} 
+                            className="py-4 border-b border-white/5 hover:text-secondary hover:border-secondary/30 transition-all w-full active:bg-white/5 rounded-xl"
+                        >
+                            {t.nav_contact}
+                        </button>
+                    </div>
+                  
+                    <div className="h-4"></div>
+                    
+                    <a 
+                        href={`https://wa.me/${WHATSAPP_NUMBER}`} 
+                        className="bg-secondary text-primary px-8 py-4 rounded-2xl text-lg font-bold shadow-lg shadow-secondary/20 hover:shadow-secondary/40 transition-all active:scale-95 flex items-center justify-center gap-3 w-full"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <i className="fab fa-whatsapp text-2xl"></i>
+                        {t.mobile_cta}
+                    </a>
+                </div>
+              </div>
+            </>
+          );
+        };
+
+        // 9. App
+        const App = () => {
+          // Initialize state from local storage or default to 'ar'
+          const [language, setLanguage] = useState(() => {
+            const saved = localStorage.getItem('site_lang');
+            return (saved === 'en' || saved === 'ar') ? saved : 'ar';
+          });
+
+          // Effect to update HTML dir and lang attributes
+          useEffect(() => {
+            document.documentElement.lang = language;
+            document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+            localStorage.setItem('site_lang', language);
+          }, [language]);
+
+          const t = TRANSLATIONS[language];
+
+          return (
+            <div className={`min-h-screen ${language === 'en' ? 'font-english' : 'font-sans'}`}>
+              <Navbar language={language} setLanguage={setLanguage} t={t} />
+              <Hero t={t} language={language} />
+              <Services t={t} language={language} />
+              <About t={t} language={language} />
+              <Partners t={t} />
+              <Contact t={t} language={language} />
+              <Footer />
+              <FloatingWhatsapp />
+            </div>
+          );
+        };
+
+        // --- MOUNT ---
+        const rootElement = document.getElementById('root');
+        if (!rootElement) {
+          throw new Error("Could not find root element to mount to");
+        }
+
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        );
     </script>
 </body>
 </html>
