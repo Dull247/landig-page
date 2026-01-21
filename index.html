@@ -980,9 +980,7 @@
 
                   {/* Desktop Menu */}
                   <div className="hidden lg:flex items-center gap-8 text-[11px] font-black uppercase tracking-widest text-slate-400">
-                    <button onClick={() => navLinkClick('about')} className="hover:text-secondary transition-colors py-2">{t.nav_about}</button>
                     <button onClick={() => navLinkClick('services')} className="hover:text-secondary transition-colors py-2">{t.nav_services}</button>
-                    {/* New Link Added Here */}
                     <button onClick={() => navLinkClick('about')} className="hover:text-secondary transition-colors py-2">{t.nav_why}</button>
                     <button onClick={() => navLinkClick('contact')} className="hover:text-secondary transition-colors py-2">{t.nav_contact}</button>
                   </div>
@@ -1035,18 +1033,11 @@
 
                     <div className="flex flex-col gap-4 text-xl font-black uppercase tracking-widest text-white">
                         <button 
-                            onClick={() => navLinkClick('about')} 
-                            className="py-4 border-b border-white/5 hover:text-secondary hover:border-secondary/30 transition-all w-full active:bg-white/5 rounded-xl"
-                        >
-                            {t.nav_about}
-                        </button>
-                        <button 
                             onClick={() => navLinkClick('services')} 
                             className="py-4 border-b border-white/5 hover:text-secondary hover:border-secondary/30 transition-all w-full active:bg-white/5 rounded-xl"
                         >
                             {t.nav_services}
                         </button>
-                        {/* New Link Added Here for Mobile */}
                         <button 
                             onClick={() => navLinkClick('about')} 
                             className="py-4 border-b border-white/5 hover:text-secondary hover:border-secondary/30 transition-all w-full active:bg-white/5 rounded-xl"
@@ -1123,4 +1114,4 @@
         );
     </script>
 </body>
-</html>
+</html> 
