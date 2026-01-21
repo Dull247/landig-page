@@ -9,8 +9,8 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome (Updated to 6.5.2 for X Icon support) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <!-- React & ReactDOM (Development versions for easy single-file usage) -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -122,68 +122,19 @@
         const { useState, useEffect, useCallback } = React;
 
         // --- TYPES ---
-        type Language = 'AR' | 'EN';
-
-        interface TranslationSchema {
-            nav_about: string;
-            nav_services: string;
-            nav_contact: string;
-            nav_cta: string;
-            mobile_cta: string;
-            hero_badge: string;
-            hero_title_1: string;
-            hero_title_2: string;
-            hero_desc: string;
-            hero_btn_primary: string;
-            hero_btn_secondary: string;
-            hero_social_proof: string;
-            hero_badge_visa: string;
-            services_subtitle: string;
-            services_title: string;
-            service_1_title: string;
-            service_1_desc: string;
-            service_2_title: string;
-            service_2_desc: string;
-            service_3_title: string;
-            service_3_desc: string;
-            why_title: string;
-            why_1_title: string;
-            why_1_desc: string;
-            why_2_title: string;
-            why_2_desc: string;
-            trusted_by: string;
-            partners_plus: string;
-            form_title: string;
-            form_desc: string;
-            form_point_1: string;
-            form_point_2: string;
-            label_name: string;
-            label_phone: string;
-            label_level: string;
-            input_placeholder_name: string;
-            input_placeholder_phone: string;
-            option_english: string;
-            option_bachelors: string;
-            option_masters: string;
-            form_submit: string;
-            whatsapp_message_start: string;
-            whatsapp_label_name: string;
-            whatsapp_label_phone: string;
-            whatsapp_label_level: string;
-        }
-
-        interface Translations {
-            ar: TranslationSchema;
-            en: TranslationSchema;
-        }
+        /**
+         * @typedef {'AR' | 'EN'} Language
+         */
 
         // --- CONSTANTS ---
         const WHATSAPP_NUMBER = "60186602976";
 
-        const TRANSLATIONS: Translations = {
+        /** @type {Translations} */
+        const TRANSLATIONS = {
             ar: {
                 nav_about: "من نحن",
                 nav_services: "خدماتنا",
+                nav_why: "لماذا يختارنا الطلاب؟",
                 nav_contact: "اتصل بنا",
                 nav_cta: "تواصل الآن",
                 mobile_cta: "تواصل واتساب",
@@ -203,6 +154,17 @@
                 service_2_desc: "تسجيل في أقوى معاهد اللغة الإنجليزية لضمان وصولك للمستوى المطلوب قبل بدء الدراسة الجامعية.",
                 service_3_title: "إجراءات الفيزا",
                 service_3_desc: "فريق مختص يتابع ملف التأشيرة الخاص بك مع دائرة الهجرة الماليزية لضمان القبول السلس.",
+                
+                // New Services
+                service_4_title: "استقبال مطار مجاناً",
+                service_4_desc: "نستقبلك من المطار فور وصولك ونقلك إلى مقر إقامتك بكل راحة وأمان مجاناً.",
+                service_5_title: "شريحة نت مجاناً",
+                service_5_desc: "توفير شريحة اتصال وإنترنت مجانية للطالب فور الوصول للبقاء على اتصال مع الأهل.",
+                service_6_title: "توفير السكن",
+                service_6_desc: "مساعدتك في اختيار وحجز السكن المناسب والآمن والقريب من الحرم الجامعي.",
+                service_7_title: "متابعة مستمرة",
+                service_7_desc: "نحن معك خطوة بخطوة، متابعة ودعم طوال مسيرتك الدراسية لتذليل أي عقبات.",
+
                 why_title: "لماذا يختارنا الطلاب؟",
                 why_1_title: "متابعة شخصية",
                 why_1_desc: "لست مجرد رقم عندنا، نحن معك في كل خطوة حتى تستقر في غرفتك الجامعية.",
@@ -214,23 +176,45 @@
                 form_desc: "سيتواصل معك مستشارك التعليمي خلال 24 ساعة لتقديم خطة دراسية كاملة تناسب طموحك.",
                 form_point_1: "استشارة أكاديمية احترافية مجانية",
                 form_point_2: "تحديد الميزانية وخيارات السكن",
+                
+                // Form Labels
                 label_name: "الاسم الكامل",
                 label_phone: "رقم الواتساب",
                 label_level: "المستوى التعليمي",
+                label_duration: "مدة الدراسة (بالأشهر)",
+                label_major: "التخصص المرغوب",
+
                 input_placeholder_name: "مثال: أحمد محمد",
                 input_placeholder_phone: "+966 5xxxxxxxx",
+                input_placeholder_major: "مثال: هندسة برمجيات، طب، إدارة...",
+
                 option_english: "لغة إنجليزية",
                 option_bachelors: "بكالوريوس",
                 option_masters: "ماجستير / دكتوراة",
+                suffix_months: "شهور",
+
                 form_submit: "إرسال الطلب عبر واتساب",
                 whatsapp_message_start: "مرحبا، أرغب في استشارة مجانية",
                 whatsapp_label_name: "الاسم",
                 whatsapp_label_phone: "الهاتف",
-                whatsapp_label_level: "التخصص"
+                whatsapp_label_level: "المستوى",
+                whatsapp_label_duration: "المدة المطلوبة",
+                whatsapp_label_major: "التخصص المطلوب",
+
+                // Footer & Floating Whatsapp
+                footer_social_title: "تابعنا على منصات التواصل الإجتماعي",
+                footer_contact_title: "التواصل السريع",
+                contact_nasser: "أ.ناصر الحامدي",
+                contact_abdulrahman: "أ.عبدالرحمن محمد",
+                contact_reem: "أ.ريم",
+                whatsapp_popup_title: "اختر المستشار التعليمي",
+                whatsapp_bubble_title: "تحدث مع المستشار التعليمي",
+                whatsapp_bubble_subtitle: "قدم للحصول على التأشيرة الطلابية"
             },
             en: {
                 nav_about: "About Us",
                 nav_services: "Services",
+                nav_why: "Why Choose Us?",
                 nav_contact: "Contact",
                 nav_cta: "Contact Now",
                 mobile_cta: "WhatsApp Us",
@@ -250,6 +234,17 @@
                 service_2_desc: "Registration in top English language institutes to ensure you reach the required level before university.",
                 service_3_title: "Visa Procedures",
                 service_3_desc: "A dedicated team monitors your visa file with the Malaysian Immigration Department to ensure smooth approval.",
+                
+                // New Services EN
+                service_4_title: "Free Airport Pickup",
+                service_4_desc: "Free reception from the airport and transportation to your accommodation safely and comfortably.",
+                service_5_title: "Free Student SIM",
+                service_5_desc: "Providing a free internet and calling SIM card for the student upon arrival to stay connected.",
+                service_6_title: "Accommodation",
+                service_6_desc: "Helping you find and book suitable and safe accommodation near the university campus.",
+                service_7_title: "Ongoing Follow-up",
+                service_7_desc: "We are with you step by step, providing support and follow-up throughout your entire study journey.",
+
                 why_title: "Why Choose Us?",
                 why_1_title: "Personal Follow-up",
                 why_1_desc: "You are not just a number to us; we are with you every step of the way until you settle into your dorm.",
@@ -261,94 +256,240 @@
                 form_desc: "Your educational consultant will contact you within 24 hours to provide a complete study plan suited to your ambitions.",
                 form_point_1: "Free Professional Academic Consultation",
                 form_point_2: "Budgeting and Accommodation Options",
+                
+                // Form Labels
                 label_name: "Full Name",
                 label_phone: "WhatsApp Number",
                 label_level: "Education Level",
+                label_duration: "Study Duration (Months)",
+                label_major: "Desired Major",
+
                 input_placeholder_name: "Ex: John Doe",
                 input_placeholder_phone: "+60 12 xxxxxxxx",
+                input_placeholder_major: "Ex: Software Engineering, Medicine...",
+
                 option_english: "English Course",
                 option_bachelors: "Bachelor's Degree",
                 option_masters: "Master's / PhD",
+                suffix_months: "Months",
+
                 form_submit: "Send Request via WhatsApp",
                 whatsapp_message_start: "Hello Malaysia Mate, I would like a free consultation",
                 whatsapp_label_name: "Name",
                 whatsapp_label_phone: "Phone",
-                whatsapp_label_level: "Level"
+                whatsapp_label_level: "Level",
+                whatsapp_label_duration: "Duration",
+                whatsapp_label_major: "Major",
+
+                // Footer & Floating Whatsapp EN
+                footer_social_title: "Follow us on Social Media",
+                footer_contact_title: "Fast Contact",
+                contact_nasser: "Mr. Nasser Al-Hamdi",
+                contact_abdulrahman: "Mr. Abdulrahman Mohammed",
+                contact_reem: "Ms. Reem",
+                whatsapp_popup_title: "Choose Educational Consultant",
+                whatsapp_bubble_title: "Chat with Consultant",
+                whatsapp_bubble_subtitle: "Apply for Student Visa"
             }
         };
 
         // --- COMPONENTS ---
 
         // 1. FloatingWhatsapp
-        const FloatingWhatsapp = () => {
+        const FloatingWhatsapp = ({ t }) => {
+          const [isOpen, setIsOpen] = useState(false);
+
+          const contacts = [
+            { name: t.contact_nasser, phone: "601164118565", display: "+60 11-6411 8565" },
+            { name: t.contact_abdulrahman, phone: "60186602976", display: "+60 18-660 2976" },
+            { name: t.contact_reem, phone: "966550309506", display: "+966 55-030 9506" }
+          ];
+
           return (
-            <a 
-              href={`https://wa.me/${WHATSAPP_NUMBER}`} 
-              target="_blank" 
-              rel="noreferrer"
-              aria-label="Contact on WhatsApp"
-              className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[100] group flex items-center justify-center"
-            >
-              {/* Pulse Effect */}
-              <div className="absolute inset-0 bg-success rounded-full animate-ping opacity-75 group-hover:opacity-100 transition-opacity"></div>
+            // Force LTR for correct positioning of the FAB relative to the screen edge
+            <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[100] flex flex-col items-end gap-4" dir="ltr">
               
-              {/* Button */}
-              <div className="relative bg-success text-white w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-2xl shadow-success/50 transform transition-transform duration-300 hover:scale-110 hover:rotate-12 cursor-pointer border-2 border-white/20">
-                <i className="fab fa-whatsapp text-3xl md:text-4xl filter drop-shadow-md"></i>
+              {/* Popup Menu (Force RTL for Arabic content) */}
+              <div className={`transition-all duration-300 origin-bottom-right transform ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-0 opacity-0 translate-y-10 pointer-events-none'}`} dir="rtl">
+                  <div className="bg-white rounded-2xl shadow-2xl border border-white/20 overflow-hidden w-72 md:w-80">
+                      <div className="bg-primary p-4 text-center border-b border-white/10 relative overflow-hidden">
+                          <div className="absolute inset-0 bg-secondary/10"></div>
+                          <span className="relative z-10 text-white font-black text-sm md:text-base tracking-wide">{t.whatsapp_popup_title}</span>
+                      </div>
+                      <div className="flex flex-col bg-white max-h-[60vh] overflow-y-auto custom-scrollbar">
+                          {contacts.map((contact, idx) => (
+                              <a 
+                                  key={idx}
+                                  href={`https://wa.me/${contact.phone}`} 
+                                  target="_blank" 
+                                  rel="noreferrer"
+                                  className="group flex items-center justify-between p-4 hover:bg-slate-50 transition-colors border-b last:border-0 border-slate-100 text-right"
+                                  onClick={() => setIsOpen(false)}
+                              >
+                                  <div className="flex items-center gap-3">
+                                      <div className="w-10 h-10 rounded-full bg-success/10 flex items-center justify-center text-success group-hover:bg-success group-hover:text-white transition-colors shrink-0">
+                                          <i className="fab fa-whatsapp text-xl"></i>
+                                      </div>
+                                      <div className="flex flex-col items-start">
+                                          <span className="font-bold text-primary text-sm md:text-base">{contact.name}</span>
+                                          <span className="text-xs text-slate-500 font-english font-medium" dir="ltr">{contact.display}</span>
+                                      </div>
+                                  </div>
+                                  <i className="fas fa-chevron-left text-slate-300 text-xs group-hover:text-secondary group-hover:-translate-x-1 transition-all"></i>
+                              </a>
+                          ))}
+                      </div>
+                  </div>
               </div>
-            </a>
+                {/* Main Interaction Area */}
+              <div className="flex items-center gap-3">
+                  
+                {/* Text Bubble (Hidden when open) */}
+                <div className={`hidden md:flex flex-col items-end bg-white/90 backdrop-blur-md text-primary px-4 py-2 rounded-xl shadow-lg border border-white/20 transition-all duration-300 origin-right ${isOpen ? 'opacity-0 translate-x-4 pointer-events-none' : 'opacity-100'}`}>
+                   {/* Header with Icon */}
+                   <div className="flex items-center gap-2 mb-0.5">
+                        <span className="font-black text-xs md:text-sm whitespace-nowrap text-primary">{t.whatsapp_bubble_title}</span>
+                        <i className="fab fa-whatsapp text-success text-sm animate-pulse"></i>
+                   </div>
+                   <span className="text-[10px] md:text-xs text-slate-600 font-bold whitespace-nowrap">{t.whatsapp_bubble_subtitle}</span>
+                   
+                   {/* Arrow pointing right (towards button) */}
+                   <div className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-3 h-3 bg-white/90 rotate-45 border-t border-r border-white/20"></div>
+                </div>
+
+                {/* Main Toggle Button */}
+                <button 
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="group relative flex items-center justify-center outline-none"
+                  aria-label="Toggle Contact Menu"
+                >
+                  <div className="absolute inset-0 bg-success rounded-full animate-ping opacity-75 group-hover:opacity-100 transition-opacity"></div>
+                  
+                  <div className={`relative bg-success text-white w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-2xl shadow-success/50 transform transition-transform duration-300 border-2 border-white/20 ${isOpen ? 'rotate-90 bg-primary border-secondary/50' : 'hover:scale-110 hover:rotate-12'}`}>
+                    {/* FIXED: Correctly switching between 'fab' (Brand) for Whatsapp and 'fas' (Solid) for Close icon */}
+                    <i className={`${isOpen ? 'fas fa-times' : 'fab fa-whatsapp'} text-3xl md:text-4xl filter drop-shadow-md transition-all duration-300`}></i>
+                  </div>
+                </button>
+              </div>
+
+            </div>
           );
         };
 
         // 2. Footer
-        const Footer = () => {
+        const Footer = ({ t }) => {
+          const socialLinks = [
+            { name: 'Instagram', icon: 'fa-brands fa-instagram', url: 'https://www.instagram.com/Malaysiamate' },
+            { name: 'TikTok', icon: 'fa-brands fa-tiktok', url: 'https://www.tiktok.com/@malaysiamate' },
+            { name: 'Snapchat', icon: 'fa-brands fa-snapchat', url: 'https://www.snapchat.com/@malaysiamate' },
+            { name: 'X', icon: 'fa-brands fa-x-twitter', url: 'https://x.com/MyMalaysiamate' },
+            { name: 'Linktree', icon: 'fa-solid fa-link', url: 'https://linktr.ee/Malaysiamate' }
+          ];
+
           return (
             <footer className="py-12 md:py-20 px-4 md:px-6 border-t-2 border-white/10 bg-primary">
               <div className="container mx-auto">
-                <div className="flex flex-col lg:flex-row justify-between items-center gap-10 md:gap-12 mb-12 md:mb-16">
-                  
-                  {/* Logo */}
-                  <div className="flex items-center gap-3 select-none opacity-90 hover:opacity-100 transition-opacity">
-                    <img 
-                      src="malaysiamate.png.jpg" 
-                      alt="MalaysiaMate Logo" 
-                      className="w-10 h-10 object-cover rounded-lg"
-                      onError={(e) => {
-                        const target = e.target;
-                        target.src = 'https://cdn-icons-png.flaticon.com/512/3429/3429433.png';
-                      }}
-                    />
-                    <span className="text-xl font-black text-white uppercase leading-none">
-                      Malaysia<span className="text-secondary italic">Mate</span>
-                    </span>
-                  </div>
+                {/* Updated Layout: Simplified centered column since logo is removed */}
+                <div className="flex flex-col items-center justify-center gap-10 md:gap-12 mb-12 md:mb-16">
 
-                  {/* Social Links */}
-                  <div className="flex flex-wrap justify-center gap-6 md:gap-10 text-slate-500 font-bold uppercase text-[10px] md:text-xs tracking-widest">
-                    {[
-                        { name: 'Instagram', url: 'https://www.instagram.com/Malaysiamate' },
-                        { name: 'TikTok', url: 'https://www.tiktok.com/@malaysiamate' },
-                        { name: 'Snapchat', url: 'https://www.snapchat.com/@malaysiamate' },
-                        { name: 'X', url: 'https://x.com/MyMalaysiamate' },
-                        { name: 'Linktree', url: 'https://linktr.ee/Malaysiamate' }
-                    ].map(social => (
+                  {/* Social Links & Contact Info Wrapper - Centered */}
+                  <div className="flex flex-col items-center gap-6 w-full">
+                      
+                      {/* Social Media Title */}
+                      <div className="text-secondary font-black tracking-widest text-sm md:text-base relative text-center">
+                        <span className="relative z-10">{t.footer_social_title}</span>
+                      </div>
+
+                      {/* Social Icons */}
+                      <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+                        {socialLinks.map(social => (
+                            <a 
+                                key={social.name}
+                                href={social.url} 
+                                target="_blank" 
+                                rel="noreferrer"
+                                className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/5 text-slate-400 hover:bg-secondary hover:text-primary transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-secondary/20 border border-white/5 group"
+                                aria-label={social.name}
+                            >
+                                <i className={`${social.icon} text-lg md:text-xl group-hover:scale-110 transition-transform`}></i>
+                            </a>
+                        ))}
+                      </div>
+
+                      {/* Fast Contact Title */}
+                      <div className="text-secondary font-black tracking-widest text-sm md:text-base mt-2 relative text-center">
+                        <span className="relative z-10">{t.footer_contact_title}</span>
+                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-0.5 bg-secondary/30 rounded-full"></div>
+                      </div>
+
+                      {/* Contact Info Section */}
+                      <div className="text-center font-bold text-slate-300 text-sm md:text-base flex flex-col gap-3 w-full items-center">
+                        
+                        {/* Contact 1: Nasser (Fully Clickable) */}
                         <a 
-                            key={social.name}
-                            href={social.url} 
-                            target="_blank" 
-                            rel="noreferrer"
-                            className="hover:text-secondary transition-colors hover:scale-110"
+                           href="https://wa.me/601164118565" 
+                           target="_blank" 
+                           rel="noreferrer"
+                           className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 group hover:bg-white/5 px-4 py-2 rounded-xl transition-all duration-300 w-full md:w-auto"
+                           dir="ltr"
                         >
-                            {social.name}
+                             <i className="fab fa-whatsapp text-success text-xl group-hover:scale-110 transition-transform"></i>
+                             <span className="font-english group-hover:text-secondary transition-colors">+60 11-6411 8565</span>
+                             <span className="hidden md:inline text-secondary opacity-50">•</span>
+                             <span className="text-secondary font-bold">{t.contact_nasser}</span>
                         </a>
-                    ))}
+
+                        {/* Contact 2: Abdulrahman (Fully Clickable) */}
+                        <a 
+                           href="https://wa.me/60186602976" 
+                           target="_blank" 
+                           rel="noreferrer"
+                           className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 group hover:bg-white/5 px-4 py-2 rounded-xl transition-all duration-300 w-full md:w-auto"
+                           dir="ltr"
+                        >
+                             <i className="fab fa-whatsapp text-success text-xl group-hover:scale-110 transition-transform"></i>
+                             <span className="font-english group-hover:text-secondary transition-colors">+60 18-660 2976</span>
+                             <span className="hidden md:inline text-secondary opacity-50">•</span>
+                             <span className="text-secondary font-bold">{t.contact_abdulrahman}</span>
+                        </a>
+
+                        {/* Contact 3: Reem (Fully Clickable) */}
+                        <a 
+                           href="https://wa.me/966550309506" 
+                           target="_blank" 
+                           rel="noreferrer"
+                           className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 group hover:bg-white/5 px-4 py-2 rounded-xl transition-all duration-300 w-full md:w-auto"
+                           dir="ltr"
+                        >
+                             <i className="fab fa-whatsapp text-success text-xl group-hover:scale-110 transition-transform"></i>
+                             <span className="font-english group-hover:text-secondary transition-colors">+966 55-030 9506</span>
+                             <span className="hidden md:inline text-secondary opacity-50">•</span>
+                             <span className="text-secondary font-bold">{t.contact_reem}</span>
+                        </a>
+
+                      </div>
                   </div>
-                  
-                  {/* Copyright */}
-                  <p className="text-slate-500 text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.4em] text-center">
-                    &copy; 2026 MALAYSIA MATE PRO. WORLD CLASS ADMISSIONS.
-                  </p>
                 </div>
+
+                {/* Copyright & Company Info - Updated Layout */}
+                <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 w-full text-center md:text-left">
+                    
+                    {/* Registered Company Info (Left/First) */}
+                    <div className="flex flex-col gap-1 order-2 md:order-1">
+                        <p className="text-slate-500 text-[9px] md:text-[10px] font-bold uppercase tracking-widest">
+                            Registered Company: MYMALAYSIAMATE SDN. BHD.
+                        </p>
+                        <p className="text-slate-600 text-[8px] md:text-[9px] font-medium uppercase tracking-widest">
+                            Company No.: 202501049263 (1650671-T)
+                        </p>
+                    </div>
+
+                    {/* Copyright (Right/Second) */}
+                    <p className="text-slate-500 text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] order-1 md:order-2">
+                        &copy; 2026 MALAYSIA MATE PRO. WORLD CLASS ADMISSIONS.
+                    </p>
+                </div>
+
               </div>
             </footer>
           );
@@ -359,7 +500,9 @@
           const [formData, setFormData] = useState({
             name: '',
             phone: '',
-            level: 'english'
+            level: 'english',
+            duration: '1',
+            major: ''
           });
 
           const handleSubmit = useCallback((e) => {
@@ -369,7 +512,18 @@
             const levelElement = document.getElementById('userLevel');
             const levelText = levelElement ? levelElement.options[levelElement.selectedIndex].text : formData.level;
 
-            const text = `${t.whatsapp_message_start}:\n\n- ${t.whatsapp_label_name}: ${formData.name}\n- ${t.whatsapp_label_phone}: ${formData.phone}\n- ${t.whatsapp_label_level}: ${levelText}`;
+            let text = `${t.whatsapp_message_start}:\n\n` +
+                       `- ${t.whatsapp_label_name}: ${formData.name}\n` +
+                       `- ${t.whatsapp_label_phone}: ${formData.phone}\n` +
+                       `- ${t.whatsapp_label_level}: ${levelText}`;
+
+            // Add dynamic fields
+            if (formData.level === 'english') {
+                text += `\n- ${t.whatsapp_label_duration}: ${formData.duration} ${t.suffix_months}`;
+            } else {
+                text += `\n- ${t.whatsapp_label_major}: ${formData.major}`;
+            }
+
             const encodedText = encodeURIComponent(text);
             
             const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedText}`;
@@ -410,8 +564,8 @@
 
                   {/* Form Side */}
                   <div className="lg:w-1/2 p-8 md:p-16 relative">
-                     {/* Decorative glow */}
-                     <div className="absolute top-0 right-0 w-full h-full bg-secondary/5 blur-3xl -z-10 pointer-events-none"></div>
+                      {/* Decorative glow */}
+                      <div className="absolute top-0 right-0 w-full h-full bg-secondary/5 blur-3xl -z-10 pointer-events-none"></div>
 
                     <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8 relative z-10">
                       <div>
@@ -464,6 +618,49 @@
                             </div>
                         </div>
                       </div>
+
+                      {/* Dynamic Field: Duration for English */}
+                      {formData.level === 'english' && (
+                        <div className="animate-fade-in">
+                            <label className={`block text-[10px] font-black text-secondary uppercase tracking-widest mb-2 md:mb-3 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                                {t.label_duration}
+                            </label>
+                            <div className="relative">
+                                <select 
+                                name="duration"
+                                value={formData.duration}
+                                onChange={handleChange}
+                                className={`w-full bg-[#0D2142] border border-white/10 rounded-xl md:rounded-2xl px-5 md:px-6 py-4 outline-none focus:border-secondary transition-colors text-white text-sm md:text-base appearance-none cursor-pointer ${language === 'ar' ? 'text-right' : 'text-left'}`}
+                                >
+                                {[...Array(12).keys()].map(i => (
+                                    <option key={i+1} value={i+1}>{i+1} {t.suffix_months}</option>
+                                ))}
+                                </select>
+                                <div className={`absolute top-1/2 -translate-y-1/2 pointer-events-none text-secondary ${language === 'ar' ? 'left-6' : 'right-6'}`}>
+                                    <i className="fas fa-chevron-down text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                      )}
+
+                      {/* Dynamic Field: Major for Bachelor/Masters/PhD */}
+                      {(formData.level === 'bachelors' || formData.level === 'masters_phd') && (
+                        <div className="animate-fade-in">
+                            <label className={`block text-[10px] font-black text-secondary uppercase tracking-widest mb-2 md:mb-3 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                                {t.label_major}
+                            </label>
+                            <input 
+                              type="text" 
+                              name="major"
+                              required 
+                              placeholder={t.input_placeholder_major}
+                              value={formData.major}
+                              onChange={handleChange}
+                              className={`w-full bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-5 md:px-6 py-4 outline-none focus:border-secondary focus:bg-white/10 transition-colors text-white text-sm md:text-base ${language === 'ar' ? 'text-right' : 'text-left'}`}
+                            />
+                        </div>
+                      )}
+
                       <button 
                         type="submit" 
                         className="w-full bg-secondary text-primary py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-lg md:text-xl hover:brightness-110 shadow-lg shadow-secondary/20 transition-all active:scale-95 flex justify-center items-center gap-2"
@@ -580,6 +777,11 @@
                     { icon: "fa-university", title: t.service_1_title, desc: t.service_1_desc },
                     { icon: "fa-language", title: t.service_2_title, desc: t.service_2_desc },
                     { icon: "fa-passport", title: t.service_3_title, desc: t.service_3_desc },
+                    // New Services Added
+                    { icon: "fa-plane-arrival", title: t.service_4_title, desc: t.service_4_desc },
+                    { icon: "fa-wifi", title: t.service_5_title, desc: t.service_5_desc },
+                    { icon: "fa-house", title: t.service_6_title, desc: t.service_6_desc },
+                    { icon: "fa-user-graduate", title: t.service_7_title, desc: t.service_7_desc },
                   ].map((service, idx) => (
                     <div key={idx} className="glass-card p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] hover:bg-white/5 transition-all group border-t-2 border-transparent hover:border-secondary flex flex-col items-center text-center lg:items-start lg:text-start">
                       <div className="w-14 h-14 md:w-20 md:h-20 bg-secondary/10 text-secondary rounded-xl md:rounded-[2rem] flex items-center justify-center mb-6 md:mb-8 group-hover:scale-110 transition-transform duration-300">
@@ -780,6 +982,8 @@
                   <div className="hidden lg:flex items-center gap-8 text-[11px] font-black uppercase tracking-widest text-slate-400">
                     <button onClick={() => navLinkClick('about')} className="hover:text-secondary transition-colors py-2">{t.nav_about}</button>
                     <button onClick={() => navLinkClick('services')} className="hover:text-secondary transition-colors py-2">{t.nav_services}</button>
+                    {/* New Link Added Here */}
+                    <button onClick={() => navLinkClick('about')} className="hover:text-secondary transition-colors py-2">{t.nav_why}</button>
                     <button onClick={() => navLinkClick('contact')} className="hover:text-secondary transition-colors py-2">{t.nav_contact}</button>
                   </div>
 
@@ -842,6 +1046,13 @@
                         >
                             {t.nav_services}
                         </button>
+                        {/* New Link Added Here for Mobile */}
+                        <button 
+                            onClick={() => navLinkClick('about')} 
+                            className="py-4 border-b border-white/5 hover:text-secondary hover:border-secondary/30 transition-all w-full active:bg-white/5 rounded-xl"
+                        >
+                            {t.nav_why}
+                        </button>
                         <button 
                             onClick={() => navLinkClick('contact')} 
                             className="py-4 border-b border-white/5 hover:text-secondary hover:border-secondary/30 transition-all w-full active:bg-white/5 rounded-xl"
@@ -892,8 +1103,8 @@
               <About t={t} language={language} />
               <Partners t={t} />
               <Contact t={t} language={language} />
-              <Footer />
-              <FloatingWhatsapp />
+              <Footer t={t} />
+              <FloatingWhatsapp t={t} />
             </div>
           );
         };
