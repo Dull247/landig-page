@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دريمز وورلد للسفر والسياحة</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1.05); }
+            50% { transform: scale(1); }
+        }
+
+        .animate-pulse-slow {
+            animation: pulse-slow 20s infinite ease-in-out;
+        }
+
+        .glass-nav {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-800 antialiased">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-reverse space-x-2">
+                    <i data-lucide="compass" class="w-10 h-10 text-amber-500"></i>
+                    <div class="flex flex-col">
+                        <span id="logo-text" class="text-2xl font-black tracking-tighter leading-none text-white transition-colors duration-300">
+                            دريمز وورلد
+                        </span>
+                        <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-amber-500">
+                            للسفر والسياحة
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-reverse space-x-8">
+                    <a href="#home" class="nav-link text-sm font-bold text-white hover:text-amber-500 transition-colors">الرئيسية</a>
+                    <a href="#destinations" class="nav-link text-sm font-bold text-white hover:text-amber-500 transition-colors">الوجهات</a>
+                    <a href="#services" class="nav-link text-sm font-bold text-white hover:text-amber-500 transition-colors">خدماتنا</a>
+                    <a href="#about" class="nav-link text-sm font-bold text-white hover:text-amber-500 transition-colors">من نحن</a>
+                    <a href="#contact" class="nav-link text-sm font-bold text-white hover:text-amber-500 transition-colors">اتصل بنا</a>
+                    
+                    <button class="bg-gradient-to-l from-amber-600 to-amber-400 text-white px-8 py-2.5 rounded-full text-sm font-black shadow-xl shadow-amber-500/30 hover:shadow-amber-500/50 transition-all transform hover:-translate-y-0.5">
+                        احجز الآن
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-white">
+                        <i data-lucide="menu" id="menu-icon" class="w-8 h-8"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-t border-slate-100 absolute w-full left-0 p-8 space-y-6 shadow-2xl h-screen overflow-y-auto">
+            <a href="#home" class="mobile-nav-link block text-2xl font-black text-slate-800 border-b border-slate-50 pb-4">الرئيسية</a>
+            <a href="#destinations" class="mobile-nav-link block text-2xl font-black text-slate-800 border-b border-slate-50 pb-4">الوجهات</a>
+            <a href="#services" class="mobile-nav-link block text-2xl font-black text-slate-800 border-b border-slate-50 pb-4">خدماتنا</a>
+            <a href="#about" class="mobile-nav-link block text-2xl font-black text-slate-800 border-b border-slate-50 pb-4">من نحن</a>
+            <a href="#contact" class="mobile-nav-link block text-2xl font-black text-slate-800 border-b border-slate-50 pb-4">اتصل بنا</a>
+            <button class="w-full bg-amber-500 text-white py-4 rounded-2xl font-black text-xl shadow-lg">
+                اطلب عرض سعر
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=2000" 
+                alt="Luxury Travel" 
+                class="w-full h-full object-cover scale-105 animate-pulse-slow"
+            />
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70 backdrop-blur-[1px]"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <div class="mb-8 inline-flex items-center px-6 py-2.5 bg-amber-500/20 backdrop-blur-md border border-amber-500/30 rounded-full text-amber-200 text-sm font-bold tracking-widest">
+                <i data-lucide="star" class="w-5 h-5 ml-2 fill-amber-400 text-amber-400"></i>
+                وكالة سفريات فاخرة ومعتمدة
+            </div>
+            <h1 class="text-5xl md:text-8xl font-black text-white mb-8 leading-tight drop-shadow-2xl">
+                اكتشف <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">أحلامك</span> في عالم من الرفاهية
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-100 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+                دريمز وورلد للسفر والسياحة تأخذك إلى أرقى الوجهات العالمية مع خدمات مخصصة تضمن لك الراحة المطلقة والتميز.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <button class="bg-amber-500 text-slate-900 px-12 py-5 rounded-full font-black text-xl hover:bg-amber-400 transition-all shadow-2xl shadow-amber-500/40 w-full sm:w-auto">
+                    خطط لرحلتك الآن
+                </button>
+                <button class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-12 py-5 rounded-full font-black text-xl hover:bg-white/20 transition-all w-full sm:w-auto flex items-center justify-center">
+                    شاهد الفيديو
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="relative z-20 -mt-16 max-w-6xl mx-auto px-4">
+        <div class="bg-white rounded-3xl shadow-2xl border border-slate-100 p-8 md:p-12 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+            <div>
+                <div class="text-4xl font-black text-amber-600 mb-2">+15k</div>
+                <div class="text-slate-500 font-bold uppercase text-xs tracking-wider">عميل سعيد</div>
+            </div>
+            <div>
+                <div class="text-4xl font-black text-amber-600 mb-2">+50</div>
+                <div class="text-slate-500 font-bold uppercase text-xs tracking-wider">وجهة عالمية</div>
+            </div>
+            <div>
+                <div class="text-4xl font-black text-amber-600 mb-2">12+</div>
+                <div class="text-slate-500 font-bold uppercase text-xs tracking-wider">عام من الخبرة</div>
+            </div>
+            <div>
+                <div class="text-4xl font-black text-amber-600 mb-2">100%</div>
+                <div class="text-slate-500 font-bold uppercase text-xs tracking-wider">تقييم ممتاز</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Destinations -->
+    <section id="destinations" class="py-32 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 text-right">
+                <div>
+                    <h4 class="text-amber-600 font-black uppercase tracking-[0.2em] text-sm mb-4">اهرب من المألوف</h4>
+                    <h2 class="text-4xl md:text-6xl font-black text-slate-900 leading-tight">الوجهات الأكثر شعبية</h2>
+                </div>
+                <a href="#" class="flex items-center text-amber-600 font-black text-lg hover:text-amber-700 transition-colors group">
+                    عرض جميع الوجهات <i data-lucide="chevron-left" class="mr-2 w-6 h-6 group-hover:-translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Dubai -->
+                <div class="group relative bg-white rounded-[2.5rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-slate-100">
+                    <div class="relative h-96 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <div class="absolute top-6 right-6 bg-white/95 backdrop-blur-sm text-amber-600 px-4 py-1.5 rounded-full text-xs font-black">فخامة</div>
+                    </div>
+                    <div class="p-8 text-right">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-black text-slate-900">دبي، الإمارات</h3>
+                            <div class="flex items-center text-amber-500">
+                                <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                                <span class="mr-1 text-sm font-black">4.9</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-slate-400 text-sm mb-6 font-bold">
+                            <i data-lucide="map-pin" class="w-4 h-4 ml-1"></i>
+                            دليل سفر عالمي
+                        </div>
+                        <div class="flex justify-between items-center border-t border-slate-50 pt-6">
+                            <div class="text-slate-900 font-black text-2xl">$1,200 <span class="text-slate-400 font-normal text-sm">/ للشخص</span></div>
+                            <button class="bg-amber-100 text-amber-600 p-3 rounded-2xl group-hover:bg-amber-500 group-hover:text-white transition-all transform hover:rotate-12">
+                                <i data-lucide="chevron-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paris -->
+                <div class="group relative bg-white rounded-[2.5rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-slate-100">
+                    <div class="relative h-96 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <div class="absolute top-6 right-6 bg-white/95 backdrop-blur-sm text-amber-600 px-4 py-1.5 rounded-full text-xs font-black">رومانسية</div>
+                    </div>
+                    <div class="p-8 text-right">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-black text-slate-900">باريس، فرنسا</h3>
+                            <div class="flex items-center text-amber-500">
+                                <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                                <span class="mr-1 text-sm font-black">4.8</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-slate-400 text-sm mb-6 font-bold">
+                            <i data-lucide="map-pin" class="w-4 h-4 ml-1"></i>
+                            دليل سفر عالمي
+                        </div>
+                        <div class="flex justify-between items-center border-t border-slate-50 pt-6">
+                            <div class="text-slate-900 font-black text-2xl">$1,500 <span class="text-slate-400 font-normal text-sm">/ للشخص</span></div>
+                            <button class="bg-amber-100 text-amber-600 p-3 rounded-2xl group-hover:bg-amber-500 group-hover:text-white transition-all transform hover:rotate-12">
+                                <i data-lucide="chevron-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Maldives -->
+                <div class="group relative bg-white rounded-[2.5rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-slate-100">
+                    <div class="relative h-96 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <div class="absolute top-6 right-6 bg-white/95 backdrop-blur-sm text-amber-600 px-4 py-1.5 rounded-full text-xs font-black">استوائي</div>
+                    </div>
+                    <div class="p-8 text-right">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-black text-slate-900">المالديف</h3>
+                            <div class="flex items-center text-amber-500">
+                                <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                                <span class="mr-1 text-sm font-black">5.0</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-slate-400 text-sm mb-6 font-bold">
+                            <i data-lucide="map-pin" class="w-4 h-4 ml-1"></i>
+                            دليل سفر عالمي
+                        </div>
+                        <div class="flex justify-between items-center border-t border-slate-50 pt-6">
+                            <div class="text-slate-900 font-black text-2xl">$2,100 <span class="text-slate-400 font-normal text-sm">/ للشخص</span></div>
+                            <button class="bg-amber-100 text-amber-600 p-3 rounded-2xl group-hover:bg-amber-500 group-hover:text-white transition-all transform hover:rotate-12">
+                                <i data-lucide="chevron-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Santorini -->
+                <div class="group relative bg-white rounded-[2.5rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-slate-100">
+                    <div class="relative h-96 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <div class="absolute top-6 right-6 bg-white/95 backdrop-blur-sm text-amber-600 px-4 py-1.5 rounded-full text-xs font-black">ساحلي</div>
+                    </div>
+                    <div class="p-8 text-right">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-black text-slate-900">اليونان</h3>
+                            <div class="flex items-center text-amber-500">
+                                <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                                <span class="mr-1 text-sm font-black">4.9</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-slate-400 text-sm mb-6 font-bold">
+                            <i data-lucide="map-pin" class="w-4 h-4 ml-1"></i>
+                            دليل سفر عالمي
+                        </div>
+                        <div class="flex justify-between items-center border-t border-slate-50 pt-6">
+                            <div class="text-slate-900 font-black text-2xl">$1,800 <span class="text-slate-400 font-normal text-sm">/ للشخص</span></div>
+                            <button class="bg-amber-100 text-amber-600 p-3 rounded-2xl group-hover:bg-amber-500 group-hover:text-white transition-all transform hover:rotate-12">
+                                <i data-lucide="chevron-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-24 bg-amber-50/50 px-4">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12 text-right">
+           <div class="flex flex-col justify-center lg:col-span-1">
+             <h4 class="text-amber-600 font-black text-sm mb-4 tracking-widest">لماذا دريمز وورلد؟</h4>
+             <h2 class="text-4xl font-black text-slate-900 mb-6 leading-tight">نحن لا نبيع تذاكر، بل نصنع تجارب استثنائية</h2>
+             <p class="text-slate-600 leading-loose mb-8">
+               نتميز بدقة التفاصيل والاهتمام الشخصي بكل عميل، لنضمن لك رحلة تفوق توقعاتك في كل مرة.
+             </p>
+           </div>
+           <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                  <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 mb-6"><i data-lucide="award"></i></div>
+                  <h3 class="text-xl font-black text-slate-900 mb-2">خدمة حائزة على جوائز</h3>
+                  <p class="text-slate-500 text-sm leading-relaxed">مصنفون كأفضل وكالة سفر فاخرة في المنطقة لعام 2024.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                  <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 mb-6"><i data-lucide="users"></i></div>
+                  <h3 class="text-xl font-black text-slate-900 mb-2">مستشارون خبراء</h3>
+                  <p class="text-slate-500 text-sm leading-relaxed">فريق من خبراء السفر يمتلكون معرفة عميقة بأكثر من 100 وجهة.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                  <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 mb-6"><i data-lucide="check-circle"></i></div>
+                  <h3 class="text-xl font-black text-slate-900 mb-2">ضمان السعر</h3>
+                  <p class="text-slate-500 text-sm leading-relaxed">نقدم لك أفضل قيمة مقابل المال مع ضمان الجودة والرفاهية.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                  <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 mb-6"><i data-lucide="shield-check"></i></div>
+                  <h3 class="text-xl font-black text-slate-900 mb-2">أمان وخصوصية</h3>
+                  <p class="text-slate-500 text-sm leading-relaxed">بياناتك ورحلاتك في أمان تام مع أعلى معايير الخصوصية.</p>
+                </div>
+           </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-32 px-4 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10 text-right">
+            <div class="text-center mb-20">
+                <h4 class="text-amber-600 font-black uppercase tracking-[0.2em] text-sm mb-4">ضيافة ملكية</h4>
+                <h2 class="text-4xl md:text-6xl font-black text-slate-900">خدماتنا المتميزة</h2>
+                <p class="mt-6 text-slate-500 max-w-2xl mx-auto text-lg leading-loose">
+                    نقدم مجموعة متكاملة من الخدمات السياحية المصممة بعناية فائقة لتغطي كل تفاصيل رحلتك بأسلوب راقٍ.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div class="group bg-slate-50 p-10 rounded-[3rem] hover:bg-slate-900 transition-all duration-500 transform hover:-translate-y-4">
+                    <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center text-amber-600 mb-8 shadow-xl group-hover:bg-amber-500 group-hover:text-white transition-colors duration-500">
+                        <i data-lucide="plane" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 mb-4 group-hover:text-white transition-colors">حجز طيران</h3>
+                    <p class="text-slate-500 leading-loose group-hover:text-slate-400 transition-colors text-sm font-medium">حجوزات طيران عالمية بأفضل الأسعار وأرقى مستويات الراحة.</p>
+                </div>
+
+                <div class="group bg-slate-50 p-10 rounded-[3rem] hover:bg-slate-900 transition-all duration-500 transform hover:-translate-y-4">
+                    <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center text-amber-600 mb-8 shadow-xl group-hover:bg-amber-500 group-hover:text-white transition-colors duration-500">
+                        <i data-lucide="globe" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 mb-4 group-hover:text-white transition-colors">تأشيرات سياحية</h3>
+                    <p class="text-slate-500 leading-loose group-hover:text-slate-400 transition-colors text-sm font-medium">تسهيل استخراج التأشيرات لأهم الوجهات السياحية حول العالم.</p>
+                </div>
+
+                <div class="group bg-slate-50 p-10 rounded-[3rem] hover:bg-slate-900 transition-all duration-500 transform hover:-translate-y-4">
+                    <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center text-amber-600 mb-8 shadow-xl group-hover:bg-amber-500 group-hover:text-white transition-colors duration-500">
+                        <i data-lucide="shield-check" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 mb-4 group-hover:text-white transition-colors">تأمين سفر</h3>
+                    <p class="text-slate-500 leading-loose group-hover:text-slate-400 transition-colors text-sm font-medium">تغطية شاملة تضمن لك راحة البال طوال فترة رحلتك.</p>
+                </div>
+
+                <div class="group bg-slate-50 p-10 rounded-[3rem] hover:bg-slate-900 transition-all duration-500 transform hover:-translate-y-4">
+                    <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center text-amber-600 mb-8 shadow-xl group-hover:bg-amber-500 group-hover:text-white transition-colors duration-500">
+                        <i data-lucide="camera" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 mb-4 group-hover:text-white transition-colors">جولات سياحية</h3>
+                    <p class="text-slate-500 leading-loose group-hover:text-slate-400 transition-colors text-sm font-medium">برامج سياحية مخصصة حسب رغبتك لتعيش تجربة لا تُنسى.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 px-4 bg-slate-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                <div class="relative order-2 lg:order-1">
+                    <div class="aspect-[4/5] rounded-[4rem] overflow-hidden shadow-2xl relative z-10">
+                        <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="absolute -bottom-12 -left-12 w-80 h-80 rounded-[3rem] overflow-hidden shadow-2xl z-20 hidden md:block border-8 border-white">
+                        <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover" />
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 text-right">
+                    <h4 class="text-amber-600 font-black uppercase tracking-[0.2em] text-sm mb-4">قصة دريمز وورلد</h4>
+                    <h2 class="text-4xl md:text-6xl font-black text-slate-900 mb-8 leading-tight">نصنع ذكريات تدوم مدى الحياة</h2>
+                    <p class="text-xl text-slate-600 mb-8 leading-relaxed font-light">تأسست دريمز وورلد للسفر والسياحة على مبدأ بسيط: كل رحلة يجب أن تكون فريدة مثل المسافر نفسه. نحن لسنا مجرد وكالة حجز؛ نحن مهندسو التجارب.</p>
+                    <div class="space-y-6 mb-12">
+                        <div class="flex items-center space-x-reverse space-x-4"><i data-lucide="check-circle" class="text-amber-600 w-6 h-6"></i><span class="text-slate-800 font-black text-lg">مجموعة حصرية من أفخم المنتجعات والفيلات</span></div>
+                        <div class="flex items-center space-x-reverse space-x-4"><i data-lucide="check-circle" class="text-amber-600 w-6 h-6"></i><span class="text-slate-800 font-black text-lg">مساعد سفر شخصي متاح على مدار الساعة</span></div>
+                        <div class="flex items-center space-x-reverse space-x-4"><i data-lucide="check-circle" class="text-amber-600 w-6 h-6"></i><span class="text-slate-800 font-black text-lg">دخول حصري لكبار الشخصيات في الأحداث العالمية</span></div>
+                    </div>
+                    <button class="bg-slate-900 text-white px-12 py-5 rounded-full font-black text-xl hover:bg-slate-800 transition-all shadow-2xl flex items-center justify-end group">
+                        تعرف على المزيد عنا <i data-lucide="chevron-left" class="mr-3 group-hover:-translate-x-2 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-4 bg-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                <div class="text-right">
+                    <h2 class="text-5xl md:text-7xl font-black mb-8 leading-tight">لنخطط لرحلتك <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-100">القادمة معاً</span></h2>
+                    <p class="text-slate-400 mb-12 text-xl leading-relaxed max-w-xl ml-auto font-light">مستشارو السفر لدينا جاهزون لمساعدتك في التخطيط لعطلتك المثالية. تواصل معنا للحصول على استشارة شخصية مجانية.</p>
+                    
+                    <div class="space-y-10">
+                        <div class="flex items-start space-x-reverse space-x-6">
+                            <div class="bg-white/5 p-5 rounded-3xl text-amber-500"><i data-lucide="phone" class="w-8 h-8"></i></div>
+                            <div>
+                                <h4 class="text-amber-500 text-xs font-black uppercase tracking-widest mb-1">اتصل بنا</h4>
+                                <p class="text-2xl font-black tracking-wider text-left md:text-right">+971 4 000 0000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-reverse space-x-6">
+                            <div class="bg-white/5 p-5 rounded-3xl text-amber-500"><i data-lucide="mail" class="w-8 h-8"></i></div>
+                            <div>
+                                <h4 class="text-amber-500 text-xs font-black uppercase tracking-widest mb-1">البريد الإلكتروني</h4>
+                                <p class="text-2xl font-black">concierge@dreamsworld.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-10 md:p-16 rounded-[4rem] shadow-2xl text-right">
+                    <h3 class="text-3xl font-black text-slate-900 mb-8">اطلب استشارة مجانية</h3>
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3">الاسم الكامل</label>
+                                <input type="text" placeholder="أحمد محمد" class="w-full bg-slate-50 border border-slate-100 text-slate-900 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-amber-500 outline-none font-bold" />
+                            </div>
+                            <div>
+                                <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3">رقم الهاتف</label>
+                                <input type="tel" placeholder="+971 -- --- ----" class="w-full bg-slate-50 border border-slate-100 text-slate-900 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-amber-500 outline-none font-bold text-left" />
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-amber-500 text-slate-900 font-black py-5 rounded-2xl hover:bg-amber-400 transition-all shadow-xl text-xl">إرسال الطلب</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-20 px-4 border-t border-slate-50">
+        <div class="max-w-7xl mx-auto text-right">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-12 mb-20">
+                <div class="flex items-center space-x-reverse space-x-4">
+                    <i data-lucide="compass" class="w-12 h-12 text-amber-500"></i>
+                    <div class="flex flex-col">
+                        <span class="text-3xl font-black tracking-tighter text-slate-900 leading-none">دريمز وورلد</span>
+                        <span class="text-xs font-bold text-amber-600 tracking-[0.3em] uppercase">للسفر والسياحة</span>
+                    </div>
+                </div>
+                <div class="flex space-x-reverse space-x-8">
+                    <i data-lucide="facebook" class="text-slate-400 hover:text-amber-500 cursor-pointer"></i>
+                    <i data-lucide="instagram" class="text-slate-400 hover:text-amber-500 cursor-pointer"></i>
+                    <i data-lucide="twitter" class="text-slate-400 hover:text-amber-500 cursor-pointer"></i>
+                </div>
+            </div>
+            
+            <div class="text-center text-slate-400 font-bold text-sm">
+                <p>جميع الحقوق محفوظة &copy; 2024 دريمز وورلد للسفر والسياحة. بكل فخر من دبي.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        const logoText = document.getElementById('logo-text');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const menuIcon = document.getElementById('menu-icon');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass-nav', 'shadow-lg', 'py-3');
+                navbar.classList.remove('py-5');
+                logoText.classList.replace('text-white', 'text-slate-900');
+                navLinks.forEach(link => link.classList.replace('text-white', 'text-slate-700'));
+                menuIcon.parentElement.classList.replace('text-white', 'text-slate-900');
+            } else {
+                navbar.classList.remove('glass-nav', 'shadow-lg', 'py-3');
+                navbar.classList.add('py-5');
+                logoText.classList.replace('text-slate-900', 'text-white');
+                navLinks.forEach(link => link.classList.replace('text-slate-700', 'text-white'));
+                menuIcon.parentElement.classList.replace('text-slate-900', 'text-white');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const iconName = mobileMenu.classList.contains('hidden') ? 'menu' : 'x';
+            menuIcon.setAttribute('data-lucide', iconName);
+            lucide.createIcons();
+        });
+
+        // Close menu when clicking a link
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+    </script>
+</body>
+</html>
