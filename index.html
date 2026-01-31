@@ -3,256 +3,432 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عالم اللغة | بوابتك للدراسة في الفلبين</title>
+    <title>دريمز وورلد للسفر والسياحة</title>
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Google Fonts: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
         body {
             font-family: 'Cairo', sans-serif;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1.05); }
+            50% { transform: scale(1); }
+        }
+
+        .animate-pulse-slow {
+            animation: pulse-slow 20s infinite ease-in-out;
+        }
+
+        .glass-nav {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        html {
             scroll-behavior: smooth;
         }
-        .gradient-text {
-            background: linear-gradient(90deg, #ec4899, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .bg-custom-gradient {
-            background: linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 100%);
-        }
-        .hero-pattern {
-            background-color: #8b5cf6;
-            background-image: radial-gradient(#ec4899 0.5px, transparent 0.5px), radial-gradient(#ec4899 0.5px, #8b5cf6 0.5px);
-            background-size: 20px 20px;
-            background-position: 0 0,10px 10px;
-            opacity: 0.1;
-        }
-        /* Custom "Tag" style from the image */
-        .promo-tag {
-            background: #fff;
-            border: 2px dashed #3b82f6;
-            padding: 5px 15px;
-            position: relative;
-            clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-white text-slate-800 antialiased">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-pink-100">
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 md:h-20 items-center">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-tr from-pink-500 to-purple-600 rounded-lg flex items-center justify-center text-white shadow-lg">
-                        <i data-lucide="globe" class="w-5 h-5 md:w-6 md:h-6"></i>
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-reverse space-x-2">
+                    <i data-lucide="compass" class="w-10 h-10 text-amber-500"></i>
+                    <div class="flex flex-col">
+                        <span id="logo-text" class="text-2xl font-black tracking-tighter leading-none text-white transition-colors duration-300">
+                            دريمز وورلد
+                        </span>
+                        <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-amber-500">
+                            للسفر والسياحة
+                        </span>
                     </div>
-                    <span class="text-xl md:text-2xl font-black text-purple-900">عالم <span class="text-pink-500">اللغة</span></span>
-                </div>
-                
-                <div class="hidden md:flex items-center gap-8 font-bold text-purple-900">
-                    <a href="#home" class="hover:text-pink-500 transition-colors">الرئيسية</a>
-                    <a href="#study-system" class="hover:text-pink-500 transition-colors">نظام الدراسة</a>
-                    <a href="#features" class="hover:text-pink-500 transition-colors">المميزات</a>
-                    <a href="#contact" class="bg-yellow-400 hover:bg-yellow-500 text-purple-900 px-6 py-2 rounded-full transition-all transform hover:scale-105 shadow-md">تواصل معنا</a>
                 </div>
 
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-reverse space-x-8">
+                    <a href="#home" class="nav-link text-sm font-bold text-white hover:text-amber-500 transition-colors">الرئيسية</a>
+                    <a href="#destinations" class="nav-link text-sm font-bold text-white hover:text-amber-500 transition-colors">الوجهات</a>
+                    <a href="#services" class="nav-link text-sm font-bold text-white hover:text-amber-500 transition-colors">خدماتنا</a>
+                    <a href="#about" class="nav-link text-sm font-bold text-white hover:text-amber-500 transition-colors">من نحن</a>
+                    <a href="#contact" class="nav-link text-sm font-bold text-white hover:text-amber-500 transition-colors">اتصل بنا</a>
+                    
+                    <button class="bg-gradient-to-l from-amber-600 to-amber-400 text-white px-8 py-2.5 rounded-full text-sm font-black shadow-xl shadow-amber-500/30 hover:shadow-amber-500/50 transition-all transform hover:-translate-y-0.5">
+                        احجز الآن
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
                 <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-purple-900 p-2">
-                        <i data-lucide="menu"></i>
+                    <button id="menu-toggle" class="text-white">
+                        <i data-lucide="menu" id="menu-icon" class="w-8 h-8"></i>
                     </button>
                 </div>
             </div>
         </div>
+
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-pink-100 p-6 space-y-4 text-center font-bold shadow-lg">
-            <a href="#home" class="block text-purple-900 py-2">الرئيسية</a>
-            <a href="#study-system" class="block text-purple-900 py-2">نظام الدراسة</a>
-            <a href="#features" class="block text-purple-900 py-2">المميزات</a>
-            <a href="#contact" class="block text-pink-600 bg-pink-50 rounded-xl py-3 mt-4">تواصل معنا</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-t border-slate-100 absolute w-full left-0 p-8 space-y-6 shadow-2xl h-screen overflow-y-auto">
+            <a href="#home" class="mobile-nav-link block text-2xl font-black text-slate-800 border-b border-slate-50 pb-4">الرئيسية</a>
+            <a href="#destinations" class="mobile-nav-link block text-2xl font-black text-slate-800 border-b border-slate-50 pb-4">الوجهات</a>
+            <a href="#services" class="mobile-nav-link block text-2xl font-black text-slate-800 border-b border-slate-50 pb-4">خدماتنا</a>
+            <a href="#about" class="mobile-nav-link block text-2xl font-black text-slate-800 border-b border-slate-50 pb-4">من نحن</a>
+            <a href="#contact" class="mobile-nav-link block text-2xl font-black text-slate-800 border-b border-slate-50 pb-4">اتصل بنا</a>
+            <button class="w-full bg-amber-500 text-white py-4 rounded-2xl font-black text-xl shadow-lg">
+                اطلب عرض سعر
+            </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative pt-24 pb-12 md:pt-48 md:pb-32 overflow-hidden bg-custom-gradient">
-        <div class="absolute inset-0 hero-pattern"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                <div class="text-right space-y-6 md:space-y-8">
-                    <div class="inline-flex items-center gap-4">
-                        <div class="inline-block px-4 py-1 rounded-full bg-yellow-100 text-yellow-700 font-bold text-xs md:text-sm border border-yellow-200">
-                            مستقبلك يبدأ مع عالم اللغة 🇵🇭
-                        </div>
-                    </div>
-                    <h1 class="text-4xl md:text-7xl font-black text-purple-900 leading-tight">
-                        اكتشف آفاق التعلم في <span class="gradient-text">الفلبين</span>
-                    </h1>
-                    <p class="text-lg md:text-xl text-slate-600 leading-relaxed max-w-xl">
-                        في "عالم اللغة"، نفتح لك أبواب المستقبل في أرقى الجامعات الفلبينية. تعلم الإنجليزية في بيئة مثالية وتكاليف تنافسية.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#contact" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 shadow-xl shadow-purple-200 transition-all">
-                            ابدأ رحلتك الآن
-                            <i data-lucide="arrow-left"></i>
-                        </a>
-                        <a href="#study-system" class="bg-white border-2 border-pink-200 text-pink-600 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-pink-50 transition-all text-center">
-                            نظام الدراسة
-                        </a>
-                    </div>
-                </div>
-                <div class="relative mt-8 md:mt-0">
-                    <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 md:border-8 border-white transform md:rotate-2 hover:rotate-0 transition-transform duration-500">
-                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1000" alt="Study in PH" class="w-full h-[300px] md:h-[500px] object-cover">
-                    </div>
-                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-24 h-24 md:w-32 md:h-32 bg-yellow-400 rounded-full -z-10 blur-2xl opacity-60"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Study System Section -->
-    <section id="study-system" class="py-16 md:py-24 bg-purple-600 text-white relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-            <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white"></path>
-            </svg>
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=2000" 
+                alt="Luxury Travel" 
+                class="w-full h-full object-cover scale-105 animate-pulse-slow"
+            />
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70 backdrop-blur-[1px]"></div>
         </div>
         
-        <div class="max-w-5xl mx-auto px-4 relative z-10">
-            <div class="flex flex-col items-center text-center mb-12">
-                <div class="promo-tag text-blue-600 font-bold mb-6 text-sm md:text-base">
-                    دراسة اللغة الانجليزية
-                </div>
-                <h2 class="text-3xl md:text-6xl font-black mb-8 md:mb-12 drop-shadow-md">ما هو نظام الدراسة في الفلبين؟</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                    <div class="w-48 h-48 md:w-64 md:h-64 mx-auto rounded-full border-4 md:border-8 border-white/30 overflow-hidden shadow-2xl transition-transform hover:scale-105">
-                        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover" alt="Student 1">
-                    </div>
-                    <div class="w-48 h-48 md:w-64 md:h-64 mx-auto rounded-full border-4 md:border-8 border-white/30 overflow-hidden shadow-2xl transition-transform hover:scale-105">
-                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover" alt="Student 2">
-                    </div>
-                </div>
-
-                <div class="bg-white text-slate-900 rounded-[2rem] p-6 md:p-12 shadow-2xl max-w-3xl transform md:-rotate-1">
-                    <h3 class="text-xl md:text-3xl font-black text-blue-500 mb-4 md:mb-6">الفصول الفردية وتسمى face to face</h3>
-                    <p class="text-lg md:text-2xl leading-relaxed font-medium">
-                        وهي فصول خاصة تكون بين المدرس وبين الطلاب ويكون التركيز والمتابعة من المدرس عليك
-                    </p>
-                </div>
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <div class="mb-8 inline-flex items-center px-6 py-2.5 bg-amber-500/20 backdrop-blur-md border border-amber-500/30 rounded-full text-amber-200 text-sm font-bold tracking-widest">
+                <i data-lucide="star" class="w-5 h-5 ml-2 fill-amber-400 text-amber-400"></i>
+                وكالة سفريات فاخرة ومعتمدة
             </div>
-        </div>
-    </section>
-
-    <!-- Why Section -->
-    <section id="features" class="py-16 md:py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-12 md:mb-16 space-y-4">
-                <h2 class="text-3xl md:text-4xl font-black text-purple-900">لماذا عالم اللغة؟</h2>
-                <div class="h-1.5 w-16 md:w-24 bg-yellow-400 mx-auto rounded-full"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                <div class="p-6 md:p-8 rounded-3xl bg-pink-50 border border-pink-100 hover:shadow-xl transition-all group">
-                    <div class="w-12 h-12 md:w-14 md:h-14 bg-white rounded-2xl flex items-center justify-center text-pink-500 mb-6 shadow-sm group-hover:scale-110 transition-transform">
-                        <i data-lucide="check-circle"></i>
-                    </div>
-                    <h3 class="text-xl md:text-2xl font-bold text-purple-900 mb-4">قبول مضمون</h3>
-                    <p class="text-slate-600 leading-relaxed text-sm md:text-base">
-                        نضمن لك الحصول على قبول جامعي في أسرع وقت ممكن وبأقل مجهود من خلال شبكتنا الواسعة.
-                    </p>
-                </div>
-
-                <div class="p-6 md:p-8 rounded-3xl bg-purple-50 border border-purple-100 hover:shadow-xl transition-all group">
-                    <div class="w-12 h-12 md:w-14 md:h-14 bg-white rounded-2xl flex items-center justify-center text-purple-600 mb-6 shadow-sm group-hover:scale-110 transition-transform">
-                        <i data-lucide="shield-check"></i>
-                    </div>
-                    <h3 class="text-xl md:text-2xl font-bold text-purple-900 mb-4">دعم متكامل</h3>
-                    <p class="text-slate-600 leading-relaxed text-sm md:text-base">
-                        من الاستقبال في المطار إلى توفير السكن المناسب، عالم اللغة معك في كل خطوة.
-                    </p>
-                </div>
-
-                <div class="p-6 md:p-8 rounded-3xl bg-yellow-50 border border-yellow-100 hover:shadow-xl transition-all group">
-                    <div class="w-12 h-12 md:w-14 md:h-14 bg-white rounded-2xl flex items-center justify-center text-yellow-600 mb-6 shadow-sm group-hover:scale-110 transition-transform">
-                        <i data-lucide="graduation-cap"></i>
-                    </div>
-                    <h3 class="text-xl md:text-2xl font-bold text-purple-900 mb-4">توجيه أكاديمي</h3>
-                    <p class="text-slate-600 leading-relaxed text-sm md:text-base">
-                        نساعدك في اختيار التخصص الذي يناسب طموحاتك وميزانيتك لضمان مستقبل مهني مشرق.
-                    </p>
-                </div>
+            <h1 class="text-5xl md:text-8xl font-black text-white mb-8 leading-tight drop-shadow-2xl">
+                اكتشف <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">أحلامك</span> في عالم من الرفاهية
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-100 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+                دريمز وورلد للسفر والسياحة تأخذك إلى أرقى الوجهات العالمية مع خدمات مخصصة تضمن لك الراحة المطلقة والتميز.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <button class="bg-amber-500 text-slate-900 px-12 py-5 rounded-full font-black text-xl hover:bg-amber-400 transition-all shadow-2xl shadow-amber-500/40 w-full sm:w-auto">
+                    خطط لرحلتك الآن
+                </button>
+                <button class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-12 py-5 rounded-full font-black text-xl hover:bg-white/20 transition-all w-full sm:w-auto flex items-center justify-center">
+                    شاهد الفيديو
+                </button>
             </div>
         </div>
     </section>
 
     <!-- Stats Section -->
-    <section class="py-12 md:py-16 bg-purple-900 text-white relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 relative z-10">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <section class="relative z-20 -mt-16 max-w-6xl mx-auto px-4">
+        <div class="bg-white rounded-3xl shadow-2xl border border-slate-100 p-8 md:p-12 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+            <div>
+                <div class="text-4xl font-black text-amber-600 mb-2">+15k</div>
+                <div class="text-slate-500 font-bold uppercase text-xs tracking-wider">عميل سعيد</div>
+            </div>
+            <div>
+                <div class="text-4xl font-black text-amber-600 mb-2">+50</div>
+                <div class="text-slate-500 font-bold uppercase text-xs tracking-wider">وجهة عالمية</div>
+            </div>
+            <div>
+                <div class="text-4xl font-black text-amber-600 mb-2">12+</div>
+                <div class="text-slate-500 font-bold uppercase text-xs tracking-wider">عام من الخبرة</div>
+            </div>
+            <div>
+                <div class="text-4xl font-black text-amber-600 mb-2">100%</div>
+                <div class="text-slate-500 font-bold uppercase text-xs tracking-wider">تقييم ممتاز</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Destinations -->
+    <section id="destinations" class="py-32 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 text-right">
                 <div>
-                    <div class="text-3xl md:text-4xl font-black text-yellow-400 mb-1 md:mb-2">10+</div>
-                    <div class="text-xs md:text-sm opacity-80 uppercase tracking-widest font-bold">سنوات تميز</div>
+                    <h4 class="text-amber-600 font-black uppercase tracking-[0.2em] text-sm mb-4">اهرب من المألوف</h4>
+                    <h2 class="text-4xl md:text-6xl font-black text-slate-900 leading-tight">الوجهات الأكثر شعبية</h2>
                 </div>
-                <div>
-                    <div class="text-3xl md:text-4xl font-black text-yellow-400 mb-1 md:mb-2">40+</div>
-                    <div class="text-xs md:text-sm opacity-80 uppercase tracking-widest font-bold">جامعة شريكة</div>
+                <a href="#" class="flex items-center text-amber-600 font-black text-lg hover:text-amber-700 transition-colors group">
+                    عرض جميع الوجهات <i data-lucide="chevron-left" class="mr-2 w-6 h-6 group-hover:-translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Dubai -->
+                <div class="group relative bg-white rounded-[2.5rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-slate-100">
+                    <div class="relative h-96 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <div class="absolute top-6 right-6 bg-white/95 backdrop-blur-sm text-amber-600 px-4 py-1.5 rounded-full text-xs font-black">فخامة</div>
+                    </div>
+                    <div class="p-8 text-right">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-black text-slate-900">دبي، الإمارات</h3>
+                            <div class="flex items-center text-amber-500">
+                                <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                                <span class="mr-1 text-sm font-black">4.9</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-slate-400 text-sm mb-6 font-bold">
+                            <i data-lucide="map-pin" class="w-4 h-4 ml-1"></i>
+                            دليل سفر عالمي
+                        </div>
+                        <div class="flex justify-between items-center border-t border-slate-50 pt-6">
+                            <div class="text-slate-900 font-black text-2xl">$1,200 <span class="text-slate-400 font-normal text-sm">/ للشخص</span></div>
+                            <button class="bg-amber-100 text-amber-600 p-3 rounded-2xl group-hover:bg-amber-500 group-hover:text-white transition-all transform hover:rotate-12">
+                                <i data-lucide="chevron-left"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <div class="text-3xl md:text-4xl font-black text-yellow-400 mb-1 md:mb-2">1500+</div>
-                    <div class="text-xs md:text-sm opacity-80 uppercase tracking-widest font-bold">طالب تم توجيههم</div>
+
+                <!-- Paris -->
+                <div class="group relative bg-white rounded-[2.5rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-slate-100">
+                    <div class="relative h-96 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <div class="absolute top-6 right-6 bg-white/95 backdrop-blur-sm text-amber-600 px-4 py-1.5 rounded-full text-xs font-black">رومانسية</div>
+                    </div>
+                    <div class="p-8 text-right">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-black text-slate-900">باريس، فرنسا</h3>
+                            <div class="flex items-center text-amber-500">
+                                <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                                <span class="mr-1 text-sm font-black">4.8</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-slate-400 text-sm mb-6 font-bold">
+                            <i data-lucide="map-pin" class="w-4 h-4 ml-1"></i>
+                            دليل سفر عالمي
+                        </div>
+                        <div class="flex justify-between items-center border-t border-slate-50 pt-6">
+                            <div class="text-slate-900 font-black text-2xl">$1,500 <span class="text-slate-400 font-normal text-sm">/ للشخص</span></div>
+                            <button class="bg-amber-100 text-amber-600 p-3 rounded-2xl group-hover:bg-amber-500 group-hover:text-white transition-all transform hover:rotate-12">
+                                <i data-lucide="chevron-left"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <div class="text-3xl md:text-4xl font-black text-yellow-400 mb-1 md:mb-2">100%</div>
-                    <div class="text-xs md:text-sm opacity-80 uppercase tracking-widest font-bold">التزام بالجودة</div>
+
+                <!-- Maldives -->
+                <div class="group relative bg-white rounded-[2.5rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-slate-100">
+                    <div class="relative h-96 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <div class="absolute top-6 right-6 bg-white/95 backdrop-blur-sm text-amber-600 px-4 py-1.5 rounded-full text-xs font-black">استوائي</div>
+                    </div>
+                    <div class="p-8 text-right">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-black text-slate-900">المالديف</h3>
+                            <div class="flex items-center text-amber-500">
+                                <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                                <span class="mr-1 text-sm font-black">5.0</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-slate-400 text-sm mb-6 font-bold">
+                            <i data-lucide="map-pin" class="w-4 h-4 ml-1"></i>
+                            دليل سفر عالمي
+                        </div>
+                        <div class="flex justify-between items-center border-t border-slate-50 pt-6">
+                            <div class="text-slate-900 font-black text-2xl">$2,100 <span class="text-slate-400 font-normal text-sm">/ للشخص</span></div>
+                            <button class="bg-amber-100 text-amber-600 p-3 rounded-2xl group-hover:bg-amber-500 group-hover:text-white transition-all transform hover:rotate-12">
+                                <i data-lucide="chevron-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Santorini -->
+                <div class="group relative bg-white rounded-[2.5rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-slate-100">
+                    <div class="relative h-96 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <div class="absolute top-6 right-6 bg-white/95 backdrop-blur-sm text-amber-600 px-4 py-1.5 rounded-full text-xs font-black">ساحلي</div>
+                    </div>
+                    <div class="p-8 text-right">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-black text-slate-900">اليونان</h3>
+                            <div class="flex items-center text-amber-500">
+                                <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                                <span class="mr-1 text-sm font-black">4.9</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-slate-400 text-sm mb-6 font-bold">
+                            <i data-lucide="map-pin" class="w-4 h-4 ml-1"></i>
+                            دليل سفر عالمي
+                        </div>
+                        <div class="flex justify-between items-center border-t border-slate-50 pt-6">
+                            <div class="text-slate-900 font-black text-2xl">$1,800 <span class="text-slate-400 font-normal text-sm">/ للشخص</span></div>
+                            <button class="bg-amber-100 text-amber-600 p-3 rounded-2xl group-hover:bg-amber-500 group-hover:text-white transition-all transform hover:rotate-12">
+                                <i data-lucide="chevron-left"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Form Section -->
-    <section id="contact" class="py-12 md:py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="bg-custom-gradient rounded-[2rem] md:rounded-[3rem] p-6 md:p-16 border border-pink-100 shadow-2xl overflow-hidden relative">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 relative z-10">
-                    <div class="text-right space-y-6">
-                        <h2 class="text-3xl md:text-4xl font-black text-purple-900">تواصل مع عالم اللغة</h2>
-                        <p class="text-slate-600 text-base md:text-lg leading-relaxed">
-                            نحن هنا لمساعدتك في تخطيط مستقبلك. اترك استفسارك وسيقوم أحد مستشارينا الأكاديميين بالتواصل معك.
-                        </p>
-                        <div class="space-y-6 pt-4">
-                            <div class="flex items-center gap-4 justify-end border-b border-pink-100 pb-4">
-                                <span class="text-purple-900 font-bold text-sm md:text-base">للتواصل والاستفسار</span>
-                                <div class="w-8 h-8 md:w-10 md:h-10 bg-white rounded-full flex items-center justify-center text-blue-500 shadow-sm">
-                                    <i data-lucide="info" class="w-4 h-4 md:w-5 md:h-5"></i>
-                                </div>
+    <!-- Why Choose Us Section -->
+    <section class="py-24 bg-amber-50/50 px-4">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12 text-right">
+           <div class="flex flex-col justify-center lg:col-span-1">
+             <h4 class="text-amber-600 font-black text-sm mb-4 tracking-widest">لماذا دريمز وورلد؟</h4>
+             <h2 class="text-4xl font-black text-slate-900 mb-6 leading-tight">نحن لا نبيع تذاكر، بل نصنع تجارب استثنائية</h2>
+             <p class="text-slate-600 leading-loose mb-8">
+               نتميز بدقة التفاصيل والاهتمام الشخصي بكل عميل، لنضمن لك رحلة تفوق توقعاتك في كل مرة.
+             </p>
+           </div>
+           <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                  <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 mb-6"><i data-lucide="award"></i></div>
+                  <h3 class="text-xl font-black text-slate-900 mb-2">خدمة حائزة على جوائز</h3>
+                  <p class="text-slate-500 text-sm leading-relaxed">مصنفون كأفضل وكالة سفر فاخرة في المنطقة لعام 2024.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                  <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 mb-6"><i data-lucide="users"></i></div>
+                  <h3 class="text-xl font-black text-slate-900 mb-2">مستشارون خبراء</h3>
+                  <p class="text-slate-500 text-sm leading-relaxed">فريق من خبراء السفر يمتلكون معرفة عميقة بأكثر من 100 وجهة.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                  <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 mb-6"><i data-lucide="check-circle"></i></div>
+                  <h3 class="text-xl font-black text-slate-900 mb-2">ضمان السعر</h3>
+                  <p class="text-slate-500 text-sm leading-relaxed">نقدم لك أفضل قيمة مقابل المال مع ضمان الجودة والرفاهية.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                  <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 mb-6"><i data-lucide="shield-check"></i></div>
+                  <h3 class="text-xl font-black text-slate-900 mb-2">أمان وخصوصية</h3>
+                  <p class="text-slate-500 text-sm leading-relaxed">بياناتك ورحلاتك في أمان تام مع أعلى معايير الخصوصية.</p>
+                </div>
+           </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-32 px-4 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10 text-right">
+            <div class="text-center mb-20">
+                <h4 class="text-amber-600 font-black uppercase tracking-[0.2em] text-sm mb-4">ضيافة ملكية</h4>
+                <h2 class="text-4xl md:text-6xl font-black text-slate-900">خدماتنا المتميزة</h2>
+                <p class="mt-6 text-slate-500 max-w-2xl mx-auto text-lg leading-loose">
+                    نقدم مجموعة متكاملة من الخدمات السياحية المصممة بعناية فائقة لتغطي كل تفاصيل رحلتك بأسلوب راقٍ.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div class="group bg-slate-50 p-10 rounded-[3rem] hover:bg-slate-900 transition-all duration-500 transform hover:-translate-y-4">
+                    <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center text-amber-600 mb-8 shadow-xl group-hover:bg-amber-500 group-hover:text-white transition-colors duration-500">
+                        <i data-lucide="plane" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 mb-4 group-hover:text-white transition-colors">حجز طيران</h3>
+                    <p class="text-slate-500 leading-loose group-hover:text-slate-400 transition-colors text-sm font-medium">حجوزات طيران عالمية بأفضل الأسعار وأرقى مستويات الراحة.</p>
+                </div>
+
+                <div class="group bg-slate-50 p-10 rounded-[3rem] hover:bg-slate-900 transition-all duration-500 transform hover:-translate-y-4">
+                    <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center text-amber-600 mb-8 shadow-xl group-hover:bg-amber-500 group-hover:text-white transition-colors duration-500">
+                        <i data-lucide="globe" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 mb-4 group-hover:text-white transition-colors">تأشيرات سياحية</h3>
+                    <p class="text-slate-500 leading-loose group-hover:text-slate-400 transition-colors text-sm font-medium">تسهيل استخراج التأشيرات لأهم الوجهات السياحية حول العالم.</p>
+                </div>
+
+                <div class="group bg-slate-50 p-10 rounded-[3rem] hover:bg-slate-900 transition-all duration-500 transform hover:-translate-y-4">
+                    <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center text-amber-600 mb-8 shadow-xl group-hover:bg-amber-500 group-hover:text-white transition-colors duration-500">
+                        <i data-lucide="shield-check" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 mb-4 group-hover:text-white transition-colors">تأمين سفر</h3>
+                    <p class="text-slate-500 leading-loose group-hover:text-slate-400 transition-colors text-sm font-medium">تغطية شاملة تضمن لك راحة البال طوال فترة رحلتك.</p>
+                </div>
+
+                <div class="group bg-slate-50 p-10 rounded-[3rem] hover:bg-slate-900 transition-all duration-500 transform hover:-translate-y-4">
+                    <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center text-amber-600 mb-8 shadow-xl group-hover:bg-amber-500 group-hover:text-white transition-colors duration-500">
+                        <i data-lucide="camera" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 mb-4 group-hover:text-white transition-colors">جولات سياحية</h3>
+                    <p class="text-slate-500 leading-loose group-hover:text-slate-400 transition-colors text-sm font-medium">برامج سياحية مخصصة حسب رغبتك لتعيش تجربة لا تُنسى.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 px-4 bg-slate-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                <div class="relative order-2 lg:order-1">
+                    <div class="aspect-[4/5] rounded-[4rem] overflow-hidden shadow-2xl relative z-10">
+                        <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="absolute -bottom-12 -left-12 w-80 h-80 rounded-[3rem] overflow-hidden shadow-2xl z-20 hidden md:block border-8 border-white">
+                        <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover" />
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 text-right">
+                    <h4 class="text-amber-600 font-black uppercase tracking-[0.2em] text-sm mb-4">قصة دريمز وورلد</h4>
+                    <h2 class="text-4xl md:text-6xl font-black text-slate-900 mb-8 leading-tight">نصنع ذكريات تدوم مدى الحياة</h2>
+                    <p class="text-xl text-slate-600 mb-8 leading-relaxed font-light">تأسست دريمز وورلد للسفر والسياحة على مبدأ بسيط: كل رحلة يجب أن تكون فريدة مثل المسافر نفسه. نحن لسنا مجرد وكالة حجز؛ نحن مهندسو التجارب.</p>
+                    <div class="space-y-6 mb-12">
+                        <div class="flex items-center space-x-reverse space-x-4"><i data-lucide="check-circle" class="text-amber-600 w-6 h-6"></i><span class="text-slate-800 font-black text-lg">مجموعة حصرية من أفخم المنتجعات والفيلات</span></div>
+                        <div class="flex items-center space-x-reverse space-x-4"><i data-lucide="check-circle" class="text-amber-600 w-6 h-6"></i><span class="text-slate-800 font-black text-lg">مساعد سفر شخصي متاح على مدار الساعة</span></div>
+                        <div class="flex items-center space-x-reverse space-x-4"><i data-lucide="check-circle" class="text-amber-600 w-6 h-6"></i><span class="text-slate-800 font-black text-lg">دخول حصري لكبار الشخصيات في الأحداث العالمية</span></div>
+                    </div>
+                    <button class="bg-slate-900 text-white px-12 py-5 rounded-full font-black text-xl hover:bg-slate-800 transition-all shadow-2xl flex items-center justify-end group">
+                        تعرف على المزيد عنا <i data-lucide="chevron-left" class="mr-3 group-hover:-translate-x-2 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-4 bg-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                <div class="text-right">
+                    <h2 class="text-5xl md:text-7xl font-black mb-8 leading-tight">لنخطط لرحلتك <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-100">القادمة معاً</span></h2>
+                    <p class="text-slate-400 mb-12 text-xl leading-relaxed max-w-xl ml-auto font-light">مستشارو السفر لدينا جاهزون لمساعدتك في التخطيط لعطلتك المثالية. تواصل معنا للحصول على استشارة شخصية مجانية.</p>
+                    
+                    <div class="space-y-10">
+                        <div class="flex items-start space-x-reverse space-x-6">
+                            <div class="bg-white/5 p-5 rounded-3xl text-amber-500"><i data-lucide="phone" class="w-8 h-8"></i></div>
+                            <div>
+                                <h4 class="text-amber-500 text-xs font-black uppercase tracking-widest mb-1">اتصل بنا</h4>
+                                <p class="text-2xl font-black tracking-wider text-left md:text-right">+971 4 000 0000</p>
                             </div>
-                            <div class="flex items-center gap-4 justify-end">
-                                <span class="text-xl md:text-2xl text-purple-900 font-black" dir="ltr">+966 55 341 3328</span>
-                                <div class="w-10 h-10 md:w-12 md:h-12 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg shrink-0">
-                                    <i data-lucide="phone" class="w-5 h-5 md:w-6 md:h-6"></i>
-                                </div>
+                        </div>
+                        <div class="flex items-start space-x-reverse space-x-6">
+                            <div class="bg-white/5 p-5 rounded-3xl text-amber-500"><i data-lucide="mail" class="w-8 h-8"></i></div>
+                            <div>
+                                <h4 class="text-amber-500 text-xs font-black uppercase tracking-widest mb-1">البريد الإلكتروني</h4>
+                                <p class="text-2xl font-black">concierge@dreamsworld.com</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <form class="space-y-4" id="contact-form">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <input type="text" placeholder="الاسم الكامل" class="w-full px-5 py-3 md:px-6 md:py-4 rounded-xl md:rounded-2xl bg-white border border-pink-100 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all text-right shadow-sm text-sm md:text-base">
-                            <input type="email" placeholder="البريد الإلكتروني" class="w-full px-5 py-3 md:px-6 md:py-4 rounded-xl md:rounded-2xl bg-white border border-pink-100 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all text-right shadow-sm text-sm md:text-base">
+                </div>
+
+                <div class="bg-white p-10 md:p-16 rounded-[4rem] shadow-2xl text-right">
+                    <h3 class="text-3xl font-black text-slate-900 mb-8">اطلب استشارة مجانية</h3>
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3">الاسم الكامل</label>
+                                <input type="text" placeholder="أحمد محمد" class="w-full bg-slate-50 border border-slate-100 text-slate-900 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-amber-500 outline-none font-bold" />
+                            </div>
+                            <div>
+                                <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3">رقم الهاتف</label>
+                                <input type="tel" placeholder="+971 -- --- ----" class="w-full bg-slate-50 border border-slate-100 text-slate-900 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-amber-500 outline-none font-bold text-left" />
+                            </div>
                         </div>
-                        <select class="w-full px-5 py-3 md:px-6 md:py-4 rounded-xl md:rounded-2xl bg-white border border-pink-100 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all text-right appearance-none shadow-sm text-sm md:text-base">
-                            <option>اختر البرنامج الدراسي</option>
-                            <option>دورة لغة (Face to Face)</option>
-                            <option>بكالوريوس</option>
-                            <option>دراسات عليا</option>
-                        </select>
-                        <textarea rows="4" placeholder="رسالتك إلينا" class="w-full px-5 py-3 md:px-6 md:py-4 rounded-xl md:rounded-2xl bg-white border border-pink-100 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all text-right shadow-sm text-sm md:text-base"></textarea>
-                        <button type="submit" class="w-full py-4 bg-gradient-to-l from-pink-500 to-purple-600 text-white font-black text-lg rounded-xl md:rounded-2xl shadow-lg hover:opacity-90 transition-opacity">
-                            إرسال الطلب
-                        </button>
+                        <button type="submit" class="w-full bg-amber-500 text-slate-900 font-black py-5 rounded-2xl hover:bg-amber-400 transition-all shadow-xl text-xl">إرسال الطلب</button>
                     </form>
                 </div>
             </div>
@@ -260,84 +436,74 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 text-right">
-                <div class="md:col-span-2 space-y-6">
-                    <div class="flex items-center gap-2 justify-end">
-                        <span class="text-xl md:text-2xl font-black">عالم <span class="text-pink-500">اللغة</span></span>
-                        <div class="w-8 h-8 bg-gradient-to-tr from-pink-500 to-purple-600 rounded-lg flex items-center justify-center text-white">
-                            <i data-lucide="globe"></i>
-                        </div>
+    <footer class="bg-white py-20 px-4 border-t border-slate-50">
+        <div class="max-w-7xl mx-auto text-right">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-12 mb-20">
+                <div class="flex items-center space-x-reverse space-x-4">
+                    <i data-lucide="compass" class="w-12 h-12 text-amber-500"></i>
+                    <div class="flex flex-col">
+                        <span class="text-3xl font-black tracking-tighter text-slate-900 leading-none">دريمز وورلد</span>
+                        <span class="text-xs font-bold text-amber-600 tracking-[0.3em] uppercase">للسفر والسياحة</span>
                     </div>
-                    <p class="text-slate-400 max-w-sm mr-auto text-sm md:text-base leading-relaxed">
-                        خبيرك الأول في التعليم واللغة بالفلبين. نقدم حلولاً تعليمية متكاملة لضمان نجاحك الأكاديمي والمهني.
-                    </p>
                 </div>
-                <div class="hidden sm:block">
-                    <h5 class="text-lg font-bold mb-6 text-yellow-400">عن المؤسسة</h5>
-                    <ul class="space-y-3 text-slate-400 text-sm md:text-base">
-                        <li><a href="#home" class="hover:text-white transition-colors">الرئيسية</a></li>
-                        <li><a href="#study-system" class="hover:text-white transition-colors">نظام الدراسة</a></li>
-                        <li><a href="#features" class="hover:text-white transition-colors">المميزات</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="text-lg font-bold mb-6 text-yellow-400">تواصل اجتماعي</h5>
-                    <div class="flex gap-4 justify-end">
-                        <a href="#" class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-purple-600 transition-colors">
-                            <i data-lucide="facebook" class="w-5 h-5"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-pink-500 transition-colors">
-                            <i data-lucide="instagram" class="w-5 h-5"></i>
-                        </a>
-                        <a href="https://wa.me/966553413328" class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-green-500 transition-colors">
-                            <i data-lucide="phone" class="w-5 h-5"></i>
-                        </a>
-                    </div>
+                <div class="flex space-x-reverse space-x-8">
+                    <i data-lucide="facebook" class="text-slate-400 hover:text-amber-500 cursor-pointer"></i>
+                    <i data-lucide="instagram" class="text-slate-400 hover:text-amber-500 cursor-pointer"></i>
+                    <i data-lucide="twitter" class="text-slate-400 hover:text-amber-500 cursor-pointer"></i>
                 </div>
             </div>
-            <div class="border-t border-slate-800 mt-12 pt-8 text-center text-slate-500 text-xs md:text-sm">
-                &copy; 2026 عالم اللغة - جميع الحقوق محفوظة
+            
+            <div class="text-center text-slate-400 font-bold text-sm">
+                <p>جميع الحقوق محفوظة &copy; 2024 دريمز وورلد للسفر والسياحة. بكل فخر من دبي.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/966553413328" class="fixed bottom-6 left-6 md:bottom-8 md:left-8 w-14 h-14 md:w-16 md:h-16 bg-green-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform z-50">
-        <i data-lucide="message-circle" class="w-7 h-7 md:w-8 md:h-8"></i>
-    </a>
-
     <script>
+        // Initialize Lucide Icons
         lucide.createIcons();
 
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        const logoText = document.getElementById('logo-text');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const menuIcon = document.getElementById('menu-icon');
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass-nav', 'shadow-lg', 'py-3');
+                navbar.classList.remove('py-5');
+                logoText.classList.replace('text-white', 'text-slate-900');
+                navLinks.forEach(link => link.classList.replace('text-white', 'text-slate-700'));
+                menuIcon.parentElement.classList.replace('text-white', 'text-slate-900');
+            } else {
+                navbar.classList.remove('glass-nav', 'shadow-lg', 'py-3');
+                navbar.classList.add('py-5');
+                logoText.classList.replace('text-slate-900', 'text-white');
+                navLinks.forEach(link => link.classList.replace('text-slate-700', 'text-white'));
+                menuIcon.parentElement.classList.replace('text-slate-900', 'text-white');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const iconName = mobileMenu.classList.contains('hidden') ? 'menu' : 'x';
+            menuIcon.setAttribute('data-lucide', iconName);
+            lucide.createIcons();
         });
 
         // Close menu when clicking a link
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
+        mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
-                menu.classList.add('hidden');
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
             });
-        });
-
-        document.getElementById('contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const btn = e.target.querySelector('button');
-            const originalText = btn.innerText;
-            btn.innerText = 'جاري الإرسال...';
-            btn.disabled = true;
-            
-            setTimeout(() => {
-                btn.innerText = 'تم الإرسال بنجاح!';
-                btn.classList.replace('from-pink-500', 'from-green-500');
-                btn.classList.replace('to-purple-600', 'to-green-600');
-                e.target.reset();
-            }, 1500);
         });
     </script>
 </body>
